@@ -1,15 +1,14 @@
 from interruption import Interruption
 
 class Kernel:
-    def __init__(self, aCpu, aDisc, aMem, aHand, aQueue):
+    def __init__(self, aCpu, aDisc, aMem, aHand, aQueue, aIO, aClock):
         self.disc = aDisc
         self.cpu = aCpu
         self.memory = aMem
         self.handler = aHand
         self.qReady = aQueue
-        self.semaphoreMKernel = Semaphore(0)
-        self.semaphoreMCPU = Semaphore(0)
-        self.semaphoreIO = Semaphore(0)
+        self.IO = aIO
+        self.clock = aClock
 
     def getQReady(self):
         return self.qReady
@@ -26,9 +25,16 @@ class Kernel:
     def getHandle(self):
         return self.handler
 
+    def getIO(self):
+        return self.IO
+
+    def getClock(self):
+        return self.clock
+
     def startUp(self):
-        #crearia los hilos de los threads de I/O, CPU y Kernel
-        #ESTEBAN        !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        self.getCpu().start()
+        self.getClock().start()
+        
 
     def run(self, name):
         #busca programa en disco
