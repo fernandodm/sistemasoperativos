@@ -4,7 +4,7 @@ class Clock(Thread):
 
     def __init__(self):
         #esto es para que se puede parar el thread
-        super(StoppableThread, self).__init__()
+        super(Stoppable.Thread, self).__init__()
         self._stop = Event()
         
         self.suscribed = []

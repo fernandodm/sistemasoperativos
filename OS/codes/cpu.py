@@ -26,7 +26,7 @@ class Cpu():
     def execute(self):
         
         #agarra instruccion de memoria por donde va
-        instruction =self.memory.getCells()[self.currentPcb.programCounter]
+        instruction =self.memory.getCells()[self.currentPcb.programCounter()]
         #si expiro el quantum entonces..
         #WAIT/TIMEOUT           
         if(self.quantum == self.roundRobin):

@@ -18,7 +18,11 @@ class CpuTest(unittest.TestCase):
         mMemory = Mock()
         mHandler = Mock()
         self.cpu = Cpu(mMemory,mHandler,0)
-        self.aPcb = Pcb(0,0,0)
+        self.aPcb = Mock()
+        when(self.aPcb).pid().thenReturn(0)
+        when(self.aPcb).basePointer().thenReturn(0)
+        when(self.aPcb).programCounter().thenReturn(0)
+        when(self.aPcb).size().thenReturn(0)
         self.instruction = Mock()
 
     def test_changeRoundRobin(self):
@@ -28,7 +32,7 @@ class CpuTest(unittest.TestCase):
     def test_pcIncrease(self):
         self.cpu.currentPcb = self.aPcb
         self.cpu.pcIncrease()
-        assert (self.cpu.currentPcb.programCounter == 1)
+        verify(self.aPcb).pcIncrease()
 
     def test_assignPcb(self):
         self.cpu.assignPcb(self.aPcb)
@@ -46,7 +50,6 @@ class CpuTest(unittest.TestCase):
     def test_havePcbWithOutPcb(self):
         self.assertFalse(self.cpu.havePcb())
 
-
     def test_executeWithFullQuantum(self):
         when(self.cpu.memory).getCells().thenReturn([self.instruction])
         when(self.instruction).execute().thenReturn(False)
@@ -58,6 +61,7 @@ class CpuTest(unittest.TestCase):
         verify(self.cpu.handler,times(0)).toKill(self.aPcb)
         verify(self.cpu.handler,times(0)).toIO(self.aPcb)
         assert self.cpu.quantum == 0
+
 
     def test_executeWithOutFullQuantum(self):
         when(self.cpu.memory).getCells().thenReturn([self.instruction])
@@ -91,7 +95,7 @@ class CpuTest(unittest.TestCase):
         verify(self.cpu.handler,times(0)).toKill(self.aPcb)
         verify(self.cpu.handler,times(1)).toIO(self.aPcb)
         assert self.cpu.quantum == 0
-        
+
         
 suite = unittest.TestLoader().loadTestsFromTestCase(CpuTest)
 unittest.TextTestRunner(verbosity=2).run(suite)    
