@@ -37,18 +37,7 @@ class Kernel:
         
 
     def run(self, name):
-        #busca programa en disco
-        prog = self.getProgramasDelDisco(name)
-        #pregunta a disco en donde poner el programa
-        cell = self.getMemory().getFirstCellWithSize(prog.getSize())
-        #le indica a su handle que cree el pcb
-        pcb = self.getHandle().execute(Interrupcion.NEW, prog)
-        #lo pone en memoria principal
-        for instr in prog.getInstructions():
-            self.mainMemory.putDateInCell(instr,cell)
-            cell = cell + 1
-        pcb.pasarAReady()
-        self.getQReady().addPcb(pcb)
+        #QUE HACE
         
 
     def getProgramasDelDisco(self, name):

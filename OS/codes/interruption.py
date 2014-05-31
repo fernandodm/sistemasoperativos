@@ -1,4 +1,4 @@
-class Interrupcion:
+class Interruption:
     TIMEOUT="timeout"
     KILL = "kill"
     NEW = "new"
