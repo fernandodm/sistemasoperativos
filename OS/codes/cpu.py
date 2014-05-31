@@ -1,55 +1,75 @@
 class Cpu(): 
     
-    def __init__(self, aMemory, aWaitingIO, aHandler, aQueue):
+    def __init__(self, aMemory, aHandler, aSem):
         self.currentPcb = None
         self.memory = aMemory
         self.handler = aHandler
-        self.waitingIO = aWaitingIO
-        self.queue = aQueue
         self.quantum = 0
-        
-    def getInstructionFetch(self):
-        fetch = self.currentPcb.programCounter
-        instruction = self.memory.getCells()[fetch]
+        self.roundRobin = 3
+        self.semaphore = aSem
+
+    def changeRoundRobin(self, nro):
+        self.roundRobin = nro
     
     def pcIncrease(self):
         self.currentPcb.pcIncrease()
-        
-    def finishPcb(self):
-        self.currentPcb.toExit()
-        
-    def sendPcbTOWaitingIO(self)
-        self.waitingIO.queueInstruction(currentPcb)
 
-    def run(self):
-        #agarra el pcb de la cola
-        if(self.currentPcb == None):
-            #SHEDULERRRR !!!!!!!!!!
-            self.currentPcb = self.queue.getMax()
+    def assignPcb(self,pcb):
+        self.currentPcb = pcb
+
+    def removePcb(self):
+        self.currentPcb = None
+
+    def havePcb(self):
+        return self.currentPcb != None
+
+    def execute(self):
+        
         #agarra instruccion de memoria por donde va
         instruction =self.memory.getCells()[self.currentPcb.programCounter]
-        #if(se ejecuta una instruccion)
-        #sumar el quantum
-        #if(preguntar si expiro el quantum)
-        # le dice al handler que lo ponga en wait
-        # me saco el pcb
-        if(self.quantum == 3):
-            self.handler.toWait(self.pcb)
-            self.currentPcb = None
+        #si expiro el quantum entonces..
+        #WAIT/TIMEOUT           
+        if(self.quantum == self.roundRobin):
+            # le dice al handler que lo ponga en wait
+            #el handler se ocupa de delegar el contentSwitching
+            self.handler.toWait(self.currentPcb)
+            #setea quantum en 0
             self.quantum = 0
-            
+
+        #si la instruccion es de IO entonces..
+        #IO
+        elif(instruction.isIOInstruction()):
+            #le indica al hanlder que es de IO y le delega el contentSwitching
+            self.handler.toIO(self.currentPcb)
+            #setea quantum en 0
+            self.quantum = 0
+    
+        #si la instruccion cuando se ejecuta nos da true
+        #significa que es la ultima del proceso actual
+        #por lo cual..
+        #KILL
         elif(instruction.execute()):
             
-            #si es true le da kill y se lo manda al handler
-            #decir a handler que mate el pcb
-            self.handler.toKill(self.pcb)
-            #me saco el pcb
-            self.currentPcb = None
-            #quantum en 0
+            #le manda el pcb al handler para que lo mate
+            #el handler se ocupa de delegar el contentSwitching
+            self.handler.toKill(self.currentPcb)
+            #setea quantum en 0
             self.quantum = 0
+            
         else:
-            #si es false incrementa el pc
+            #si es false incrementa el pc y el quantum en 1
             self.currentPcb.pcIncrease()
-            self.quantum += 1 
-        #le dice a su handler que ejecute los eventos
-        self.handler.run()
+            self.quantum += 1
+
+    def run(self):
+        
+        if(self.havePcb()):
+
+            #LUCHA POR EL SEMAFORO
+            self.semaphore.acquire()
+
+            if(self.havePcb()):
+                self.execute()
+
+            #DEVUELVE EL SEMAFORO
+            self.semaphore.release()   
