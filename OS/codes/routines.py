@@ -1,3 +1,13 @@
+#Clase abstracta
+class Routine(): 
+
+    def __init__(self, aKernel):
+        self.kernel = aKernel
+
+    def run(self, irq):
+        #Delegación a la subclase
+        pass
+
 class Routines():
 
     def __init__(self, aKernel):
@@ -7,10 +17,10 @@ class Routines():
         routine= self.routines.get(irq.getType())
         routine.run(irq)
 
-class NewRoutine():
+class NewRoutine(Routine):
 
     def __init__(self,aKernel):
-        self.kernel = aKernel
+        super(NewRoutine, self).__init__(aKernel)
 
     def run(self, irq):
         #busca programa en disco
@@ -27,10 +37,10 @@ class NewRoutine():
         p.pasarAReady()
         self.kernel.scheduler.addPcb(p)
 
-class KillRoutine():
+class KillRoutine(Routine):
 
     def __init__(self,aKernel):
-        self.kernel = aKernel
+        super(KillRoutine, self).__init__(aKernel)
 
     def run(self, irq):
         #saca pcb de cpu
@@ -41,10 +51,10 @@ class KillRoutine():
         pcb = self.kernel.getScheduler().getNextPcb()
         self.kernel.getCpu().assignPcb(pcb)
 
-class TimeOutRoutine():
+class TimeOutRoutine(Routine):
 
     def __init__(self,aKernel):
-        self.kernel = aKernel
+        super(TimeOutRoutine, self).__init__(aKernel)
 
     def run(self,irq):
         #sacar el pcb de cpu
