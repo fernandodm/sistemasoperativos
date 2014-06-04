@@ -19,7 +19,7 @@ class ClockTest(unittest.TestCase):
 
 	def test_startUp(self):
 		assert (self.clock.isRunning == False)
-		self.clock.setUp()
+		self.clock.startUp()
 		assert (self.clock.isRunning == True)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(ClockTest)

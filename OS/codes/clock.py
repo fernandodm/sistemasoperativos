@@ -1,11 +1,11 @@
-from threading import Thread
+import threading, time
 
-class Clock(Thread):
+class Clock(threading.Thread):
 
     def __init__(self):
         #esto es para que se puede parar el thread
-        super(Stoppable.Thread, self).__init__()
-        self._stop = Event()
+        super(Clock, self).__init__()
+        self._stop = threading.Event()
         
         self.suscribed = []
         self.isRunning = False
@@ -31,4 +31,4 @@ class Clock(Thread):
     def run(self):
         while(self.isRunning):
             self.notify()
-            self.sleep(1)
+            time.sleep(1)

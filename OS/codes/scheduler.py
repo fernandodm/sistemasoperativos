@@ -1,16 +1,18 @@
-from Queue import Queue
+from fifoQueue import FifoQueue
+from priorityQueue import PriorityQueue
 
 class Scheduler():
-    def __init__(self, aQueueReady, aFifoQueue):
-    self.queueReady = aQueueReady
-    self.queueFifo = aFifoQueue
-    self.currentQueue = aFifoQueue
+    def __init__(self):
+        self.currentQueue = FifoQueue()
 
     def getNextPcb(self):
         return self.currentQueue.getMax()
 
-    def setModeFIFO(self):
-        self.currentQueue = Queue()
+    def addPcb(self, pcb):
+        self.currentQueue.addPcb(pcb)
 
-    def setModePriority(self):
-        self.currentQueue = self.queueReady
+    def setFIFOMode(self):
+        self.currentQueue = FifoQueue()
+
+    def setPriorityMode(self):
+        self.currentQueue = PriorityQueue()
