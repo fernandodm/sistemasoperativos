@@ -1,13 +1,14 @@
 from interruption import Interruption
+from interruptionprocessor import InterruptionProcessor
 from irq import Irq
 
 class InterruptionHandler:
 
-     def __init__(self, aSem, aRoutines, aKernel, aInterruptionProcessor):    
+     def __init__(self, aSem, aKernel):    
 
           self.pid = 0
           self.eventQueue = []
-          self.interruptionProcessor = InterruptionProcessor(aRoutines,self, aKernel)
+          self.interruptionProcessor = InterruptionProcessor(self, aKernel)
           self.semaphore = aSem
 
      def handler(self, aIrq):

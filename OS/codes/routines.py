@@ -1,3 +1,4 @@
+from interruption import Interruption
 #Clase abstracta
 class Routine(): 
 
@@ -5,7 +6,7 @@ class Routine():
         self.kernel = aKernel
 
     def run(self, irq):
-        #Delegación a la subclase
+        #delegacion a la subclase
         pass
 
 class Routines():
@@ -17,10 +18,10 @@ class Routines():
         routine= self.routines.get(irq.getType())
         routine.run(irq)
 
-class NewRoutine(Routine):
+class NewRoutine():#Routine):
 
-    def __init__(self,aKernel):
-        super(NewRoutine, self).__init__(aKernel)
+    def __init__(self, aKernel):
+        self.kernel = aKernel
 
     def run(self, irq):
         #busca programa en disco
@@ -39,8 +40,8 @@ class NewRoutine(Routine):
 
 class KillRoutine(Routine):
 
-    def __init__(self,aKernel):
-        super(KillRoutine, self).__init__(aKernel)
+    def __init__(self, aKernel):
+        self.kernel = aKernel
 
     def run(self, irq):
         #saca pcb de cpu
@@ -53,8 +54,8 @@ class KillRoutine(Routine):
 
 class TimeOutRoutine(Routine):
 
-    def __init__(self,aKernel):
-        super(TimeOutRoutine, self).__init__(aKernel)
+    def __init__(self, aKernel):
+        self.kernel = aKernel
 
     def run(self,irq):
         #sacar el pcb de cpu
