@@ -1,3 +1,5 @@
+from Queue import Queue
+
 class FifoQueue():
     def __init__(self):
         self.queue = Queue()
@@ -6,4 +8,4 @@ class FifoQueue():
         self.queue.put(aPcb)
 
     def getMax(self):
-        self.queue.get()
+        return self.queue.get()

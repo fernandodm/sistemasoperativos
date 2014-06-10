@@ -3,7 +3,7 @@ class Chance():
         self.elementos = []
 
     def addPcb(self,aPcb):
-        self.elementos.append(aPcb)
+        self.elementos.insert(0,aPcb)
 
     def getMax(self):
         return self.elementos.pop()

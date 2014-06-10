@@ -57,7 +57,7 @@ class CpuTest(unittest.TestCase):
         self.cpu.currentPcb = self.aPcb
         self.cpu.quantum = 3
         self.cpu.execute()
-        verify(self.cpu.handler,times(1)).toWait(self.aPcb);
+        verify(self.cpu.handler,times(1)).toWait(self.aPcb)
         verify(self.cpu.handler,times(0)).toKill(self.aPcb)
         verify(self.cpu.handler,times(0)).toIO(self.aPcb)
         assert self.cpu.quantum == 0
