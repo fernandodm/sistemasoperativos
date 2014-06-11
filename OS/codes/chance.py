@@ -13,3 +13,6 @@ class Chance():
             return otraChance
         self.elementos = self.elementos + otraChance.elementos
         return self
+
+    def isEmpty(self):
+        return len(self.elementos) == 0

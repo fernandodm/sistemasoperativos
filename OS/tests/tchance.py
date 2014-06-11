@@ -42,5 +42,13 @@ class ChanceTest(unittest.TestCase):
         self.chance.fusionarCon(otraChance)
         assert(self.chance.elementos == [aPcb,other,otherP,aPbc2,other3,otherP4])
 
+    def test_isEmpty_withElements(self):
+        self.chance.elementos = [Mock(), Mock()]
+        assert (not self.chance.isEmpty())
+
+    def test_isEmpty_whithOutElements(self):
+        assert (self.chance.isEmpty())
+
+
 suite = unittest.TestLoader().loadTestsFromTestCase(ChanceTest)
 unittest.TextTestRunner(verbosity=2).run(suite) 

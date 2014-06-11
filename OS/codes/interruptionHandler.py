@@ -23,24 +23,24 @@ class InterruptionHandler:
           return self.eventQueue.pop()
 
      def newIrq(self, aName):
-          irq = Irq(aName,interruption.NEW, self.pid)
+          irq = Irq(aName,Interruption.NEW, self.pid)
           self.handler(irq)
           self.pid += 1
 
      def toWait(self,aPcb):
-          irq = Irq(aPcb,interruption.TIMEOUT, None)
+          irq = Irq(aPcb,Interruption.TIMEOUT, None)
           self.handler(irq)
 
      def toKill(self,aPcb):
-          irq = Irq(aPcb,interruption.KILL, None)
+          irq = Irq(aPcb,Interruption.KILL, None)
           self.handler(irq)
 
      def toIOInput(self,aPcb):
-          irq = Irq(aPcb,interruption.IOINPUT, None)
+          irq = Irq(aPcb,Interruption.IOINPUT, None)
           self.handler(irq)
 
      def toIOOutput(self,aPcb):
-          irq = Irq(aPcb,interruption.IOOUTPUT, None)
+          irq = Irq(aPcb,Interruption.IOOUTPUT, None)
           self.handler(irq)
 
      def run(self):

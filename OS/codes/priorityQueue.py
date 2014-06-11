@@ -1,3 +1,5 @@
+from chance import Chance
+
 class PriorityQueue():
     def __init__(self):
         self.table = {}
@@ -5,7 +7,7 @@ class PriorityQueue():
 
     def addPcb(self,aPcb):
         adress = aPcb.getPriority() * self.chances
-        if(self.table[adress] == None):
+        if(self.table.get(adress) == None):
             ch = Chance()
             ch.addPcb(aPcb)
             self.table[adress] = ch
@@ -14,9 +16,10 @@ class PriorityQueue():
 
     def getMax(self):
 
+        self.cleanChances()
         tabla = self.table
         clavesDadasVuelta = list(reversed(sorted(tabla.keys())))
-        ultimaChance = tabla.get(clavesDadasVuelta.list[0])
+        ultimaChance = tabla.get(clavesDadasVuelta[0])
         
         for i in clavesDadasVuelta:
             if(i != 14):
@@ -31,5 +34,11 @@ class PriorityQueue():
         return ultimaChance.getMax()
                     
         
-
+    def cleanChances(self):
+        tam = self.table.keys()
+        for i in tam:
+            chance = self.table[i]
+            if(chance.isEmpty()):
+                del self.table[i]
+                
     

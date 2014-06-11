@@ -19,6 +19,7 @@ class FifoQueueTest(unittest.TestCase):
 
 	def test_addPcb(self):
 		aPcb = Mock()
+		self.fqueue.queue = Mock()
 		self.fqueue.addPcb(aPcb)
 		verify(self.fqueue.queue,times(1)).put(aPcb)
 
