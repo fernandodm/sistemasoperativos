@@ -12,13 +12,13 @@ from cpu import Cpu
 from pcb import Pcb
 from disc import Disc
 from clock import Clock
+from kernel import Kernel
 
 import unittest
 
 class KernelTest(unittest.TestCase):
 
     def setUp(self):
-
         self.IO = Mock()
         self.clock = Mock()
         self.kernel = Kernel(self.IO,self.sem)
@@ -43,5 +43,5 @@ class KernelTest(unittest.TestCase):
 
     #FALTA TEST RUN
         
-    suite = unittest.TestLoader().loadTestsFromTestCase(KernelTest)
+suite = unittest.TestLoader().loadTestsFromTestCase(KernelTest)
 unittest.TextTestRunner(verbosity=2).run(suite)  

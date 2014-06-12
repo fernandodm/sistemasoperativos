@@ -22,8 +22,8 @@ class InterruptionProcessorTest(unittest.TestCase):
             self.aHandler = Mock()
             self.aKernel = Mock()
             self.aRoutines = Mock()
-            self.aProcessor = InterruptionProcessor(aHandler, aKernel)
-            self.aProcessor.routines = aRoutines
+            self.aProcessor = InterruptionProcessor(self.aHandler, self.aKernel)
+            self.aProcessor.routines = self.aRoutines
             
         def test_execute_emptyHandler(self):
             self.aProcessor.execute()
