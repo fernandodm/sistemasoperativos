@@ -12,7 +12,7 @@ class Kernel:
         self.memory = MainMemory()
         self.scheduler = Scheduler()
         self.handler = InterruptionHandler(aSem,self)
-        self.cpu = Cpu(aMem,aHand, aSem)
+        self.cpu = Cpu(self.memory,self.handler, aSem)
         self.IO = aIO
         self.clock = Clock()
 

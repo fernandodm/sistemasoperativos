@@ -21,13 +21,14 @@ class KernelTest(unittest.TestCase):
     def setUp(self):
         self.IO = Mock()
         self.clock = Mock()
+        self.sem = Mock()
         self.kernel = Kernel(self.IO,self.sem)
         self.kernel.disc = Mock()
         self.kernel.memory = Mock()
         self.kernel.scheduler = Mock()
         self.kernel.handler = Mock()
         self.kernel.cpu = Mock()
-        self.kernel.sem = Mock()
+        self.kernel.clock = Mock()
         
     def test_startUp(self):
         self.kernel.startUp()
