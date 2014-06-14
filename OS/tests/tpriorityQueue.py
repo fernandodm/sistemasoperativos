@@ -45,5 +45,3 @@ class PriorityQueueTest(unittest.TestCase):
         assert (self.priority.getMax() == self.aPcb1)
 
 
-suite = unittest.TestLoader().loadTestsFromTestCase(PriorityQueueTest)
-unittest.TextTestRunner(verbosity=2).run(suite)    

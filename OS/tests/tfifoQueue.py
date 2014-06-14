@@ -32,6 +32,3 @@ class FifoQueueTest(unittest.TestCase):
 		self.fqueue.addPcb(pcb2)
 		assert (self.fqueue.getMax() == aPcb)
 
-
-suite = unittest.TestLoader().loadTestsFromTestCase(FifoQueueTest)
-unittest.TextTestRunner(verbosity=2).run(suite) 

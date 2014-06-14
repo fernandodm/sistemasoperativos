@@ -44,5 +44,3 @@ class KernelTest(unittest.TestCase):
 
     #FALTA TEST RUN
         
-suite = unittest.TestLoader().loadTestsFromTestCase(KernelTest)
-unittest.TextTestRunner(verbosity=2).run(suite)  

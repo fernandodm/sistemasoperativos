@@ -37,7 +37,5 @@ class InterruptionProcessorTest(unittest.TestCase):
             self.aProcessor.execute()
             verify(self.aProcessor.routines,times(3)).execute(event)
             
-               
-suite = unittest.TestLoader().loadTestsFromTestCase(InterruptionProcessorTest)
-unittest.TextTestRunner(verbosity=2).run(suite)    
+                
 

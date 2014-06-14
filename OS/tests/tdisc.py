@@ -35,5 +35,3 @@ class DiscTest(unittest.TestCase):
         self.disc.cells = [self.prog,self.prog2]
         assert self.disc.getProgram("Programa2") == self.prog2
 
-suite = unittest.TestLoader().loadTestsFromTestCase(DiscTest)
-unittest.TextTestRunner(verbosity=2).run(suite)    

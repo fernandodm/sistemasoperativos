@@ -76,6 +76,4 @@ class InterruptionHandlerTest(unittest.TestCase):
             verify(self.aHandler.interruptionProcessor,times(1)).execute();
             verify(self.aSem,times(1)).release()
 
-        
-suite = unittest.TestLoader().loadTestsFromTestCase(InterruptionHandlerTest)
-unittest.TextTestRunner(verbosity=2).run(suite)    
+

@@ -96,6 +96,3 @@ class CpuTest(unittest.TestCase):
         verify(self.cpu.handler,times(1)).toIO(self.aPcb)
         assert self.cpu.quantum == 0
 
-        
-suite = unittest.TestLoader().loadTestsFromTestCase(CpuTest)
-unittest.TextTestRunner(verbosity=2).run(suite)    

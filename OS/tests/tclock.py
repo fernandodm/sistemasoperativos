@@ -38,6 +38,3 @@ class ClockTest(unittest.TestCase):
 		verify(other,times(1)).run();
 		verify(another,times(1)).run();
 
-
-suite = unittest.TestLoader().loadTestsFromTestCase(ClockTest)
-unittest.TextTestRunner(verbosity=2).run(suite) 

@@ -48,7 +48,3 @@ class ChanceTest(unittest.TestCase):
 
     def test_isEmpty_whithOutElements(self):
         assert (self.chance.isEmpty())
-
-
-suite = unittest.TestLoader().loadTestsFromTestCase(ChanceTest)
-unittest.TextTestRunner(verbosity=2).run(suite) 
