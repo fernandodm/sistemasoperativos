@@ -6,14 +6,13 @@ class Clock(threading.Thread):
         #esto es para que se puede parar el thread
         super(Clock, self).__init__()
         self._stop = threading.Event()
-        
         self.suscribed = []
         self.isRunning = False
 
     def stop(self):
         self._stop.set()
 
-    def startUp (self):
+    def startUp(self):
         self.isRunning = True
         self.start()
 

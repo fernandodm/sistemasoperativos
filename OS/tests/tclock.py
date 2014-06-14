@@ -23,6 +23,12 @@ class ClockTest(unittest.TestCase):
 		assert (self.clock.isRunning == True)
 		self.clock.shutdown()
 
+	def test_shutdown(self):
+		self.clock.startUp()
+		assert (self.clock.isRunning == True)
+		self.clock.shutdown()
+		assert (self.clock.isRunning == False)
+
 	def test_addSuscribed(self):
 		aCpu = Mock()
 		self.clock.addSuscribed(aCpu)
@@ -37,4 +43,8 @@ class ClockTest(unittest.TestCase):
 		verify(aCpu,times(1)).run();
 		verify(other,times(1)).run();
 		verify(another,times(1)).run();
+
+	def test_runWithRunningFalse(self):
+			self.clock.run()
+			verify(self.clock, times(0)).notify()
 
