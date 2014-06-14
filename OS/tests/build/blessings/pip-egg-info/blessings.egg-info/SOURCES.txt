@@ -1,0 +1,11 @@
+LICENSE
+MANIFEST.in
+README.rst
+setup.cfg
+tox.ini
+blessings/__init__.py
+blessings/tests.py
+pip-egg-info/blessings.egg-info/PKG-INFO
+pip-egg-info/blessings.egg-info/SOURCES.txt
+pip-egg-info/blessings.egg-info/dependency_links.txt
+pip-egg-info/blessings.egg-info/top_level.txt
