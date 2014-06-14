@@ -19,24 +19,23 @@ class InterruptionProcessorTest(unittest.TestCase):
 
         def setUp(self):
             
-            self.aHandler = Mock()
-            self.aKernel = Mock()
+            self.aHandler = InterruptionHandler(Mock(),Mock())
             self.aRoutines = Mock()
-            self.aProcessor = InterruptionProcessor(self.aHandler, self.aKernel)
+            self.aProcessor = self.aHandler.interruptionProcessor
             self.aProcessor.routines = self.aRoutines
             
         def test_execute_emptyHandler(self):
-            self.aProcessor.execute()
             when(self.aHandler).isNotEmpty().thenReturn(False)
+            self.aProcessor.execute()
             verify(self.aHandler,times(0)).popEvent()
 
         def test_execute_NotEmptyHandler(self):
+            event = Mock()
+            self.aProcessor.handler.eventQueue.append(event)
+            self.aProcessor.handler.eventQueue.append(event)
+            self.aProcessor.handler.eventQueue.append(event)
             self.aProcessor.execute()
-            self.event = Mock()
-            when(self.aHandler).isNotEmpty().thenReturn(True)
-            when(self.aHandler).popEvent().thenReturn(self.event)
-            verify(self.aHandler,times(1)).popEvent()
-            verify(self.aProcessor.routines,times(1)).execute(self.event)
+            verify(self.aProcessor.routines,times(3)).execute(event)
             
                
 suite = unittest.TestLoader().loadTestsFromTestCase(InterruptionProcessorTest)

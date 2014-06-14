@@ -1,6 +1,6 @@
 from mockito import *
 
-import os, sys
+import os, sys, threading, time
 
 def _rel2abspath(fname):
     appdir=os.path.abspath(os.path.dirname(sys.argv[0]))
@@ -18,8 +18,7 @@ class InterruptionHandlerTest(unittest.TestCase):
 
         def setUp(self):
             self.aSem = Mock()
-            #self.iO = Mock()
-            #self.aKernel = Kernel(self.iO,self.aSem)
+            self.aPcb = Mock()
             self.aKernel = Mock()
             self.aHandler = InterruptionHandler(self.aSem, self.aKernel)
 
@@ -39,43 +38,43 @@ class InterruptionHandlerTest(unittest.TestCase):
             assert(not self.aHandler.isNotEmpty())
 
         def test_popEvent(self):
-            aPcb = Mock()
-            self.aHandler.eventQueue.append(aPcb)
-            assert (self.aHandler.popEvent()== aPcb)
+            self.aHandler.eventQueue.append(self.aPcb)
+            assert (self.aHandler.popEvent()== self.aPcb)
             assert (len(self.aHandler.eventQueue)==0)
 
         def test_newIrq(self):
-            self.aHandler.newIrq("cross")
-            assert(self.aHandler.eventQueue[0].pcbOrName == "cross")
+            self.aHandler.newIrq("aPcbName")
+            assert(self.aHandler.eventQueue[0].pcbOrName == "aPcbName")
             assert(self.aHandler.eventQueue[0].type == Interruption.NEW)
             assert(self.aHandler.pid == 1)
 
         def test_toWait(self):
-            self.aHandler.toWait("waiting")
-            assert(self.aHandler.eventQueue[0].pcbOrName == "waiting")
-            assert(self.aHandler.eventQueue[0].type == Interruption.READY)
+            self.aHandler.toWait(self.aPcb)
+            assert(self.aHandler.eventQueue[0].pcbOrName == self.aPcb)
+            assert(self.aHandler.eventQueue[0].type == Interruption.TIMEOUT)
 
         def test_toKill(self):
-            self.aHandler.toKill("kill")
-            assert(self.aHandler.eventQueue[0].pcbOrName == "kill")
+            self.aHandler.toKill(self.aPcb)
+            assert(self.aHandler.eventQueue[0].pcbOrName == self.aPcb)
             assert(self.aHandler.eventQueue[0].type == Interruption.KILL)
 
         def test_toIOInput(self):
-            self.aHandler.toIOInput("input")
-            assert(self.aHandler.eventQueue[0].pcbOrName == "input")
+            self.aHandler.toIOInput(self.aPcb)
+            assert(self.aHandler.eventQueue[0].pcbOrName == self.aPcb)
             assert(self.aHandler.eventQueue[0].type == Interruption.IOINPUT) 
 
         def test_toIOOutput(self):
-            self.aHandler.toIOOUTPUT("output")
-            assert(self.aHandler.eventQueue[0].pcbOrName == "output")
+            self.aHandler.toIOOutput(self.aPcb)
+            assert(self.aHandler.eventQueue[0].pcbOrName == self.aPcb)
             assert(self.aHandler.eventQueue[0].type == Interruption.IOOUTPUT) 
 
         
         def test_run(self):
-            self.run()
-            verify(self.aHandler.semaphore,times(1)).acquire()
-            verify(self.aHandler.interruptionProcessor,times(1)).execute()
-            verify(self.aHandler.semaphore,times(1)).release()
+            self.aHandler.interruptionProcessor = Mock()
+            self.aHandler.run()
+            verify(self.aSem,times(1)).acquire()
+            verify(self.aHandler.interruptionProcessor,times(1)).execute();
+            verify(self.aSem,times(1)).release()
 
         
 suite = unittest.TestLoader().loadTestsFromTestCase(InterruptionHandlerTest)
