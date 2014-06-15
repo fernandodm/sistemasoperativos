@@ -40,8 +40,7 @@ class Kernel:
         
 
     def run(self, name):
-        #QUE HACE
-        return 0
+        self.handler.newIrq(name)
         
     def getProgramasDelDisco(self, name):
         return self.getDisc().getProgram(name)

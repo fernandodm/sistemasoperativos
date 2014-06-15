@@ -42,5 +42,6 @@ class KernelTest(unittest.TestCase):
         verify(self.kernel.disc,times(1)).getProgram("program")
         assert (self.kernel.getProgramasDelDisco("program") == self.program)
 
-    #FALTA TEST RUN
-        
+    def test_run(self):
+        self.kernel.run("program")
+        verify(self.kernel.handler,times(1)).newIrq("program")     
