@@ -47,7 +47,3 @@ class MainMemoryTest(unittest.TestCase):
 	def test_getFirstFreeCellWithSize(self):
 		self.memory.cells = {0:Mock(), 1:None, 2:Mock(), 3:Mock(), 4:None, 5:None}
 		assert(self.memory.getFirstFreeCellWithSize(2) == 4)
-
-
-suite = unittest.TestLoader().loadTestsFromTestCase(MainMemoryTest)
-unittest.TextTestRunner(verbosity=2).run(suite) 

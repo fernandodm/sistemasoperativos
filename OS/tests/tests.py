@@ -9,9 +9,10 @@ from tinterruptionHandler import InterruptionHandlerTest
 from tinterruptionProcessor import InterruptionProcessorTest
 from tkernel import KernelTest
 from tpriorityQueue import PriorityQueueTest
+from tmainmemory import MainMemoryTest
 
 
-listTests = [ChanceTest,ClockTest,CpuTest,DiscTest,FifoQueueTest,InterruptionHandlerTest,InterruptionProcessorTest,KernelTest,PriorityQueueTest]
+listTests = [ChanceTest,ClockTest,CpuTest,DiscTest,FifoQueueTest,InterruptionHandlerTest,InterruptionProcessorTest,KernelTest,PriorityQueueTest, MainMemoryTest]
 
 for test in listTests:
 	suite = unittest.TestLoader().loadTestsFromTestCase(test)
