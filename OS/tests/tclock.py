@@ -44,7 +44,3 @@ class ClockTest(unittest.TestCase):
 		verify(other,times(1)).run();
 		verify(another,times(1)).run();
 
-	def test_runWithRunningFalse(self):
-			self.clock.run()
-			verify(self.clock, times(0)).notify()
-

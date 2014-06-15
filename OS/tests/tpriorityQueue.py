@@ -16,7 +16,7 @@ import unittest
 class PriorityQueueTest(unittest.TestCase):
 
     def setUp(self):
-        self.priority = PriorityQueue()
+        self.priority = PriorityQueue(3,5)
         self.aPcb1 = Mock()
         when(self.aPcb1).getPriority().thenReturn(2)
         self.aPcb2 = Mock()

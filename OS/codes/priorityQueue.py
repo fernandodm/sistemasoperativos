@@ -1,9 +1,10 @@
 from chance import Chance
 
 class PriorityQueue():
-    def __init__(self):
+    def __init__(self, cantChances, cantPriority):
         self.table = {}
-        self.chances = 3
+        self.chances = cantChances
+        self.priority = cantPriority
 
     def addPcb(self,aPcb):
         adress = aPcb.getPriority() * self.chances
@@ -21,9 +22,11 @@ class PriorityQueue():
         clavesDadasVuelta = list(reversed(sorted(tabla.keys())))
         ultimaChance = tabla.get(clavesDadasVuelta[0])
         
+        nroUltimaChance = (self.chances * self.priority) - 1
+
         for i in clavesDadasVuelta:
-            if(i != 14):
-                if(i == 13):
+            if(i != nroUltimaChance):
+                if(i == nroUltimaChance - 1):
                     tabla[i+1] = tabla.get(i).fusionarCon(tabla.get(i+1))
 
                 else:
