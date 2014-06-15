@@ -9,6 +9,12 @@ class Pcb():
         self.status = Status.NEW
         self.priority = aPriority
 
+    def getBasePointer(self):
+        return self.basePointer
+
+    def getSize(self):
+        return self.size    
+
     def pasarAReady(self):
         self.status = Status.READY
 
