@@ -34,6 +34,9 @@ class Kernel:
     def getClock(self):
         return self.clock
 
+    def getScheduler(self):
+        return self.scheduler
+
     def startUp(self):
         self.getCpu().start()
         self.getClock().start()

@@ -15,6 +15,9 @@ class PriorityQueue():
         else:
             self.table.get(adress).addPcb(aPcb)
 
+    def size(self):
+        return len(self.table)
+
     def getMax(self):
 
         self.cleanChances()

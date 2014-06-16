@@ -1,6 +1,6 @@
 class Status:
     NEW="new"
-    READING = "reading"
+    READY = "ready"
     WAITING = "waiting"
     RUNNING = "runnning"
     EXIT = "exit"
