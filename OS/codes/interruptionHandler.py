@@ -11,13 +11,19 @@ class InterruptionHandler:
           self.interruptionProcessor = InterruptionProcessor(self, aKernel)
           self.semaphore = aSem
 
+     def getEventQueue(self):
+          return self.eventQueue
+
+     def lastInstrutionIsIO(self):
+          return self.eventQueue[len(self.eventQueue)]
+
      def handler(self, aIrq):
           self.semaphore.acquire()
           self.eventQueue.append(aIrq)
           self.semaphore.release()
 
      def isNotEmpty(self):
-          return len(self.eventQueue) > 0
+          return (len(self.eventQueue) > 0)
 
      def popEvent(self):
           return self.eventQueue.pop()

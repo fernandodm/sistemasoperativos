@@ -16,6 +16,7 @@ class Kernel:
         self.IO = aIO
         self.clock = Clock()
 
+
     def getDisc(self):
         return self.disc
 
@@ -25,7 +26,7 @@ class Kernel:
     def getMemory(self):
         return self.memory
 
-    def getHandle(self):
+    def getHandler(self):
         return self.handler
 
     def getIO(self):

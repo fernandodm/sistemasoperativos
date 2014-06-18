@@ -16,7 +16,7 @@ from timeoutroutine import TimeOutRoutine
 class Routines():
 
     def __init__(self, aKernel):
-        self.routines = {Interruption.NEW: NewRoutine(aKernel), Interruption.KILL: KillRoutine(aKernel), Interruption.TIMEOUT: TimeOutRoutine(aKernel)}
+        self.routines = {Interruption.NEW: NewRoutine(aKernel), Interruption.KILL: KillRoutine(aKernel), Interruption.TIMEOUT: TimeOutRoutine(aKernel), Interruption.IOOUTPUT: IOInputRoutine(aKernel), Interruption.IOOUTPUT: IOOutputRoutine(aKernel)}
 
     def getRoutines(self):
         return self.routines

@@ -5,7 +5,7 @@ class KillRoutine():#Routine):
 
     def run(self, irq):
         #saca pcb de cpu
-        self.kernel.cpu.removePcb()
+        self.kernel.getCpu().removePcb()
         #mata el pcb de memoria
         self.kernel.getMemory().deleteDatesForPcb(irq.getPcb())
         #le asigna un nuevo pcb a cpu
