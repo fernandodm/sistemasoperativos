@@ -24,7 +24,7 @@ class IO(Thread):
  
 	def run(self):
 		#pregunta si hay elementos en su cola
-		if(not(self.queueisEmpty()):
+		if(not(self.queueisEmpty())):
 			#agarra el proximo pcb
 			pcb = self.fetch()
 			#encuentra la intruccion actual
