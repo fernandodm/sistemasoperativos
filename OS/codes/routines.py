@@ -2,6 +2,8 @@ from interruption import Interruption
 from newroutine import NewRoutine
 from killroutine import KillRoutine
 from timeoutroutine import TimeOutRoutine
+from iooutputroutine import IOOutputRoutine
+from ioinputroutine import IOInputRoutine
 
 #Clase abstracta
 #class Routine(): 

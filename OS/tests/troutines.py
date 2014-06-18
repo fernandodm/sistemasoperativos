@@ -22,7 +22,9 @@ class RoutinesTest(unittest.TestCase):
 		self.classNew = Mock()
 		self.classKill = Mock()
 		self.classTime = Mock()
-		self.r.routines = {Interruption.NEW : self.classNew, Interruption.KILL: self.classKill, Interruption.TIMEOUT: self.classTime}
+		self.classIOIn = Mock()
+		self.classIOOut = Mock()
+		self.r.routines = {Interruption.NEW : self.classNew, Interruption.KILL: self.classKill, Interruption.TIMEOUT: self.classTime, Interruption.IOOUTPUT: self.classIOIn, Interruption.IOOUTPUT: self.classIOOut}
 
 	def test_returnRoutineType_New(self):
 		irq = Mock()

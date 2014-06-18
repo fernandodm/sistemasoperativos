@@ -94,5 +94,3 @@ class MainMemoryTest(unittest.TestCase):
 		7:None, 8:None, 9:None, 10:None, 11:Mock(), 12:Mock(), 13:None, 14:None}
 		assert(self.memory.getFreeCellWithSize(10) == None)
 
-suite = unittest.TestLoader().loadTestsFromTestCase(MainMemoryTest)
-unittest.TextTestRunner(verbosity=2).run(suite) 
