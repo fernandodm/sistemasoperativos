@@ -51,20 +51,30 @@ class MainMemoryTest(unittest.TestCase):
 		self.memory.cells = {0:Mock(), 1:None, 2:Mock(), 3:Mock(), 4:None, 5:None, 6:Mock(), 7:None, 8:None}
 		assert(self.memory.getFreeCellWithSize(2) == 4)
 
-	def test_getFirstFreeCellWithSize_full(self):
+	def test_getFirstFreeCellWithSize_full_compress(self):
 		self.memory.setting = FirstSetting()
 		self.memory.cells = {0:Mock(), 1:None, 2:Mock(), 3:Mock(), 4:None, 5:None, 6:Mock(), 7:None, 8:None}
-		assert(self.memory.getFreeCellWithSize(3) == None)
+		assert(self.memory.getFreeCellWithSize(3) == 4)
+
+	def test_getFirstFreeCellWithSize_full_full(self):
+		self.memory.setting = FirstSetting()
+		self.memory.cells = {0:Mock(), 1:None, 2:Mock(), 3:Mock(), 4:None, 5:None, 6:Mock(), 7:None, 8:None}
+		assert(self.memory.getFreeCellWithSize(6) == None)	
 
 	def test_getLastFreeCellWithSize_regular(self):
 		self.memory.setting = LastSetting()
 		self.memory.cells = {0:Mock(), 1:None, 2:Mock(), 3:Mock(), 4:None, 5:None, 6:Mock(), 7:None, 8:None}
-		assert(self.memory.getFreeCellWithSize(2) == 8)
+		assert(self.memory.getFreeCellWithSize(2) == 7)
 
-	def test_getLastFreeCellWithSize_full(self):
+	def test_getLastFreeCellWithSize_full_compress(self):
 		self.memory.setting = LastSetting()
 		self.memory.cells = {0:Mock(), 1:None, 2:Mock(), 3:Mock(), 4:None, 5:None, 6:Mock(), 7:None, 8:None}
-		assert(self.memory.getFreeCellWithSize(3) == None)
+		assert(self.memory.getFreeCellWithSize(3) == 5)
+
+	def test_getLastFreeCellWithSize_full_full(self):
+		self.memory.setting = LastSetting()
+		self.memory.cells = {0:Mock(), 1:None, 2:Mock(), 3:Mock(), 4:None, 5:None, 6:Mock(), 7:None, 8:None}
+		assert(self.memory.getFreeCellWithSize(6) == None)
 
 	def test_getBadWayWithSize_regular(self):
 		self.memory.setting = BadWaySetting()
@@ -72,11 +82,17 @@ class MainMemoryTest(unittest.TestCase):
 		 7:None, 8:None, 9:None, 10:None, 11:Mock(), 12:Mock(), 13:None, 14:None}
 		assert(self.memory.getFreeCellWithSize(2) ==7)
 
-	def test_getBadWayWithSize_full(self):
+	def test_getBadWayWithSize_full_compress(self):
 		self.memory.setting = BadWaySetting()
 		self.memory.cells = {0:Mock(), 1:None, 2:Mock(), 3:Mock(), 4:None, 5:None, 6:Mock(),
 		7:None, 8:None, 9:None, 10:None, 11:Mock(), 12:Mock(), 13:None, 14:None}
-		assert(self.memory.getFreeCellWithSize(5) == None)
+		assert(self.memory.getFreeCellWithSize(5) == 6)
+
+	def test_getBadWayWithSize_full_full(self):
+		self.memory.setting = BadWaySetting()
+		self.memory.cells = {0:Mock(), 1:None, 2:Mock(), 3:Mock(), 4:None, 5:None, 6:Mock(),
+		7:None, 8:None, 9:None, 10:None, 11:Mock(), 12:Mock(), 13:None, 14:None}
+		assert(self.memory.getFreeCellWithSize(10) == None)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(MainMemoryTest)
 unittest.TextTestRunner(verbosity=2).run(suite) 

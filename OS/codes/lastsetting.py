@@ -4,15 +4,17 @@ class LastSetting():
 		return self.getLastFreeCellWithSize(cells,size)
 
 	def getLastFreeCellWithSize(self,cells,size):
-		adress = (len(cells)-1)
+
 		cont = 0
+
 		clavesDadasVuelta = list(reversed(sorted(cells.keys())))
+
 		for key in clavesDadasVuelta:
+
 			if(cells[key] == None):
 				cont += 1
-				if(cont>=size):
-					return adress+size-1
-			else:
-				cont = 0
-			adress -= 1
+				if(cont>=size and ((cells[key-1])!=None)):
+					return (len(cells)-cont)
+
+
 		return None

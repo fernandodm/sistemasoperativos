@@ -92,7 +92,7 @@ class MainMemory():
 
     def getFreeCellWithSize(self,size):
         #si no encuentro una celda libre entonces..
-        if(self.getSetting().getFreeCellWithSize(self.cells,size)== None)
+        if(self.getSetting().getFreeCellWithSize(self.cells,size) == None):
             #compacto la informacion
             self.compact()
         #retorno un valor que tiene mas chances a ser distinto de None
