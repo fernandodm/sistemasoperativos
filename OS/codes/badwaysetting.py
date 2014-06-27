@@ -1,27 +1,19 @@
 class BadWaySetting():
 
-	def getFreeCellWithSize(self,cells,size):
-		return self.getBadWayWithSize(cells,size)
+	#Devuelve la celda que tiene mas celdas libres consecutivamente
+	def getFreeCellWithSize(self,freeBlocks,size):
 
-	def getBadWayWithSize(self,cells,size):
-		adressActual = 0
-		adressMayor = 0
+		bad = None
 
-		contActual = 0
-		contMayor = 0
+		for block in freeBlocks:
+			if(block.getSize() >= size):
+				if(bad != None):
+					if(bad.size() <= block.size()):
+						bad = block
+				else:
+					bad = block
 
-		for key in cells.keys():
-
-			if(cells[key] == None):
-
-				contActual += 1
-				if((contActual>=contMayor) and (contActual>=size)):
-					contMayor = contActual
-					adressMayor = adressActual
-			else:
-				contActual = 0
-			adressActual += 1
-		if(adressMayor != 0):
-			return adressMayor-contMayor+1
-
-		return None
+		if(best != None):
+			return bad.getBase()
+		else:
+			return None

@@ -11,13 +11,14 @@ class NewRoutine():#Routine):
         prog = self.kernel.getDisc().getProgram(irq.getName())
         #pregunta a disco en donde poner el programa
         sizeProg = prog.getSize()
-        cell = self.kernel.getMemory().getFirstCellWithSize(sizeProg)
+
+        #lo pone en memoria principal y agarra la direccion base
+        self.kernel.getMemoryManager().putData(irq.getPid(), prog.getInstructions())
+
         #crea pcb con prioridad uno como default, despues se podra cambiar
-        p = Pcb(irq.getPid(),cell,sizeProg,1)
-        #lo pone en memoria principal
-        for instr in prog.getInstructions():
-            self.kernel.getMemory().putDateInCell(instr,cell)
-            cell += 1
+        p = Pcb(irq.getPid(), sizeProg,1)
+
+
         #pone pcb en estado ready y lo coloca en cola ready
         p.pasarAReady()
         self.kernel.getScheduler().addPcb(p)

@@ -33,22 +33,19 @@ class NewRoutineTest(unittest.TestCase):
 		disc = Mock()
 		when(disc).getProgram(irq.getName()).thenReturn(prog)
 
-		mem = Mock()
-		when(mem).getFirstCellWithSize(3).thenReturn(2)
+		memMan = Mock()
 
 		scheduler = Scheduler()
 
 		when(self.kernel).getDisc().thenReturn(disc)
-		when(self.kernel).getMemory().thenReturn(mem)
+		when(self.kernel).getMemoryManager().thenReturn(memMan)
 		when(self.kernel).getScheduler().thenReturn(scheduler)
 
 		assert(scheduler.currentQueue.size() == 0)
 
 		self.new.run(irq)
 
-		verify(mem,times(1)).putDateInCell(inst1,2)
-		verify(mem,times(1)).putDateInCell(inst2,3)
-		verify(mem,times(1)).putDateInCell(inst3,4)
+		verify(memMan,times(1)).putData(0,[inst1,inst2,inst3])
 
 		assert(scheduler.currentQueue.size() == 1)
 

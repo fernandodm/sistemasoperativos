@@ -42,7 +42,7 @@ class LogicalMemory():
 		for freeBlock in self.getFreeBlocks():
 			cont = 0
 			if(freeBlock.getBase() == aBase):
-				if(freeBlock.getBase() == aBase && freeBlock.getSize() == aSize):
+				if(freeBlock.getBase() == aBase & freeBlock.getSize() == aSize):
 					del self.getFreeBlocks()[cont]
 				else:
 					newBlock = Block((aBase+aSize+1),freeBlock.getFinish())
@@ -50,6 +50,18 @@ class LogicalMemory():
 				break
 			cont += 1
 
+	def putData(self, pid, base, instructionList):
+		size = len(instructionList)
+		self.deleteFreeBlockFor(base,size)
+		self.allocTakenBlock(pid, base, size)
+		self.putDataInPhysicalMemory(base,instructionList)
+
+	def putDataInPhysicalMemory(self, base, instructionList):
+		cell = base
+
+		for instr in instructionList:
+			self.mainMemory.putDataInCell(instr,cell)
+			cell += 1
 
 	def getFreeBlocks(self):
 		return self.freeBlocks

@@ -1,16 +1,13 @@
 from memoryManager import MemoryManager
+from firstsetting import FirstSetting
 from block import Block
 
 class ContinuousAssignment(MemoryManager):
 
 	def __init__(self, aLogicalMemory):
-		MemoryManager.__init__(aLogicalMemory)
+		MemoryManager.__init__(self,aLogicalMemory)
 		self.setting = FirstSetting()
 
-	def initialize(self):
-		block = Block(0, self.logicalMemory.getTotalSize())
-		#agrego un bloque libre
-		self.logicalMemory.addFreeBlock(block)
-
-	def addFreeBlock(self,aBlock):
-		self.setting.addBlock(aBlock)
+	def putData(self, pid, instructionsList):
+		cell = self.setting.getFreeCellWithSize(self.logicalMemory.getFreeBlocks(), len(instructionsList))
+		self.logicalMemory.putData(pid, cell, instructionsList)

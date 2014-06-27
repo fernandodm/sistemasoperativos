@@ -1,10 +1,10 @@
-class MemoryManager():
+class MemoryManager:
 
 	def __init__(self, aLogicalMemory):
 		self.logicalMemory = aLogicalMemory
 
-	def initialize(self):
-		pass
+	def compact(self):
+		return 0
 
-	def addFreeBlock(self, aBlock):
+	def putData(self, aPid, instructionsList):
 		pass
