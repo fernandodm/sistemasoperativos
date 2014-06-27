@@ -1,29 +1,25 @@
-from firstsetting import FirstSetting
-from lastsetting import LastSetting
-from badwaysetting import BadWaySetting
-
 class MainMemory():
-    def __init__(self):
-        self.cells = {}
-        self.setting = FirstSetting()
+    def __init__(self, aSize):
+        self.cells = range(0,aSize)
 
     def getCells(self):
         return self.cells
 
-    def getSetting(self):
-        return self.setting
+    def getSize(self):
+        return len(self.cells)
 
-    def putDateInCell(self,date,cell):
+    #PRECOND: 
+    #el numero cell no debe excederse del tamano de la memoria
+    def putDataInCell(self,data,cell):
         #si la celda existe la suscribe
-        self.cells[cell] = date
+        self.cells[cell] = data
 
-    def setLastSetting(self):
-        self.setting = LastSetting()
-
-    def setBadWaySetting(self):
-        self.setting = BadWaySetting()
-
-    def nextDateFrom(self, adress):
+    #PRECOND: 
+    #el numero cell no debe excederse del tamano de la memoria
+    def getDataOfCell(self,cell):
+        return self.cells[cell]
+"""
+    def nextDataFrom(self, adress):
         #empiezo por la direccion que me pasan
         it = adress
         #mientras este adentro de la memoria
@@ -98,3 +94,5 @@ class MainMemory():
         #retorno un valor que tiene mas chances a ser distinto de None
         #porque se compacto previamente en el caso que no entre de primera
         return self.getSetting().getFreeCellWithSize(self.cells,size)
+
+"""

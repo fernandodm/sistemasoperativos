@@ -22,7 +22,7 @@ class KernelTest(unittest.TestCase):
         self.IO = Mock()
         self.clock = Mock()
         self.sem = Mock()
-        self.kernel = Kernel(self.IO,self.sem)
+        self.kernel = Kernel(self.IO,self.sem,1000)
         self.kernel.disc = Mock()
         self.kernel.memory = Mock()
         self.kernel.scheduler = Mock()

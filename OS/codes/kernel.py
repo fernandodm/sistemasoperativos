@@ -7,9 +7,9 @@ from cpu import Cpu
 from clock import Clock
 
 class Kernel:
-    def __init__(self, aIO, aSem):
+    def __init__(self, aIO, aSem, aSize):
         self.disc = Disc()
-        self.memory = MainMemory()
+        self.memory = MainMemory(aSize)
         self.scheduler = Scheduler()
         self.handler = InterruptionHandler(aSem,self)
         self.cpu = Cpu(self.memory,self.handler, aSem)

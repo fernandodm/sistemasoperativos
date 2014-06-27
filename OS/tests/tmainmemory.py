@@ -17,13 +17,18 @@ import unittest
 class MainMemoryTest(unittest.TestCase):
 
 	def setUp(self):
-		self.memory = MainMemory()
-		self.date = Mock()
+		self.memory = MainMemory(10)
+		self.data = Mock()
 
-	def test_putDateInCellRegular(self):
-		self.memory.putDateInCell(self.date,0)
-		assert(self.memory.cells[0] == self.date)
+	def test_putDataInCell(self):
+		self.memory.putDataInCell(self.data,0)
+		assert(self.memory.cells[0] == self.data)
 
+	def test_getDataOfCell(self):
+		self.memory.getCells()[5] =  "informacion"
+		assert(self.memory.getDataOfCell(5) == "informacion")
+
+"""
 	def test_putDateInCellInMiddle(self):
 		self.memory.cells = {0:Mock(), 1:Mock(), 2:Mock()}
 		self.memory.putDateInCell(self.date,1)
@@ -93,4 +98,4 @@ class MainMemoryTest(unittest.TestCase):
 		self.memory.cells = {0:Mock(), 1:None, 2:Mock(), 3:Mock(), 4:None, 5:None, 6:Mock(),
 		7:None, 8:None, 9:None, 10:None, 11:Mock(), 12:Mock(), 13:None, 14:None}
 		assert(self.memory.getFreeCellWithSize(10) == None)
-
+"""

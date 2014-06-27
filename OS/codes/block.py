@@ -6,6 +6,9 @@ class Block():
 		self.free = True
 		self.finish = aBase + aSize
 
+	def getFinish(self):
+		self.finish
+
 	def getBase(self):
 		return self.base
 
