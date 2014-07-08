@@ -10,6 +10,5 @@ class TimeOutRoutine():#Routine):
         self.kernel.getScheduler().addPcb(irq.getPcb())
         #pide al scheduler un pcb
         aPcb = self.kernel.getScheduler().getMax()
-	if(aPcb != None):
-        	#asigna el pcb al cpu
-        	self.kernel.getCpu().assignPcb(aPcb)
+        #asigna el pcb al cpu
+        self.kernel.getCpu().assignPcb(aPcb)

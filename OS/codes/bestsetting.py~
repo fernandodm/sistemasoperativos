@@ -13,7 +13,7 @@ class BestSetting():
 				else:
 					best = block
 			elif(block.getSize() == size):
-				return block.getBase()
+				return block
 
 		if(best != None):
 			return best.getBase()

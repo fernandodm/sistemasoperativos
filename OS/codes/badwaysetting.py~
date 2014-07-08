@@ -10,8 +10,10 @@ class BadWaySetting():
 				if(bad != None):
 					if(bad.getSize() < block.getSize()):
 						bad = block
+						currentSize = block.getSize()
 				else:
 					bad = block
+					currentSize = block.getSize()
 
 		if(best != None):
 			return bad.getBase()

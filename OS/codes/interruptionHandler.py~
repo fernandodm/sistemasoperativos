@@ -18,7 +18,9 @@ class InterruptionHandler:
           return self.eventQueue[len(self.eventQueue)]
 
      def handler(self, aIrq):
+          self.semaphore.acquire()
           self.eventQueue.append(aIrq)
+          self.semaphore.release()
 
      def isNotEmpty(self):
           return (len(self.eventQueue) > 0)
