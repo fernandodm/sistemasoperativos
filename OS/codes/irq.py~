@@ -10,7 +10,7 @@ class Irq():
         return self.pid
 
     def getPcb(self):
-        return self.pcbOrName
+        return self.pcb
 
     def getName(self):
         return self.pcbOrName

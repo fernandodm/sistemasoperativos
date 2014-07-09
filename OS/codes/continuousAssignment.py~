@@ -11,4 +11,3 @@ class ContinuousAssignment(MemoryManager):
 	def putData(self, pid, instructionsList):
 		cell = self.setting.getFreeCellWithSize(self.logicalMemory.getFreeBlocks(), len(instructionsList))
 		self.logicalMemory.putData(pid, cell, instructionsList)
-

@@ -1,11 +1,12 @@
+from threading import Thread
 from kernel import Kernel
 from Queue import Queue
 from interruption import Interruption
 
-class IO():
+class IO(Thread):
 
-	def __init__(self,aKernel, aSem):
-		self.semaphore = aSem
+	def __init__(self,aKernel):
+
 		self.kernel = aKernel
 		self.queue = Queue()
 
@@ -22,7 +23,6 @@ class IO():
 		return self.getQueue().pop()
  
 	def run(self):
-		self.semaphore.acquire()
 		#pregunta si hay elementos en su cola
 		if(not(self.queueisEmpty())):
 			#agarra el proximo pcb
@@ -35,4 +35,3 @@ class IO():
 			irq = Irq(pcb,Interruption.IOOUTPUT,pcb.getPid())
 			#le manda la irq al handler
 			self.kernel.getHandler().handler(irq)
-		self.semaphore.release()

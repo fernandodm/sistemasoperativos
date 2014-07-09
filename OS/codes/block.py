@@ -7,7 +7,7 @@ class Block():
 		self.finish = aBase + aSize
 
 	def getFinish(self):
-		self.finish
+		return self.finish
 
 	def getBase(self):
 		return self.base

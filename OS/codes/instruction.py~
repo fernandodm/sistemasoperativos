@@ -13,4 +13,5 @@ class Instruction():
 
 	def execute(self):
 		print(self.content)
-		return self.isFinal
+		print bool(self.isFinal())
+		return self.isFinal()

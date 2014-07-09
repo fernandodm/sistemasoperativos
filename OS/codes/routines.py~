@@ -28,6 +28,6 @@ class Routines():
 
     def execute(self, irq):
         routine = self.returnRoutineType(irq)
-	print "execute de routine, agrarrando rutina "+str(routine)
+	print "execute de routine, agrarrando rutina "+routine
         routine.run(irq)
         

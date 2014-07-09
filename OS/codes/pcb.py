@@ -11,6 +11,9 @@ class Pcb():
     def getSize(self):
         return self.size    
 
+    def getPid(self):
+	return self.pid
+
     def pasarAReady(self):
         self.status = Status.READY
 

@@ -1,7 +1,7 @@
 class Program():
-    def __init__(self,aName, anInstructions):
+    def __init__(self,aName):
         self.name = aName
-        self.instructions = anInstructions
+        self.instructions = []
 
     def getInstructions(self):
         return self.instructions

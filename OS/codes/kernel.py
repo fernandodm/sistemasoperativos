@@ -7,17 +7,21 @@ from cpu import Cpu
 from clock import Clock
 from logicalMemory import LogicalMemory
 from continuousAssignment import ContinuousAssignment
+import io
 
 class Kernel:
-    def __init__(self, aIO, aSem, aSize):
+    def __init__(self, aSem, aSize):
         self.disc = Disc()
         self.memory = MainMemory(aSize)
         self.memoryManager = ContinuousAssignment(LogicalMemory(self.memory))
         self.handler = InterruptionHandler(aSem,self)
-        self.cpu = Cpu(self.memory,self.handler, aSem)
-	self.scheduler = Scheduler(self.cpu)        
-	self.IO = aIO
+        self.cpu = Cpu(self.memoryManager,self.handler, aSem)
+        self.scheduler = Scheduler(self.cpu)        
         self.clock = Clock()
+        self.IO = io.IO(self,aSem)
+        self.clock.addSuscribed(self.cpu)
+        self.clock.addSuscribed(self.IO)
+        self.clock.addSuscribed(self.handler)
 
     def getLogicalMemory(self):
         return self.logicalMemory
@@ -34,6 +38,9 @@ class Kernel:
     def getMemory(self):
         return self.memory
 
+    def getMemoryManager(self):
+        return self.memoryManager
+
     def getHandler(self):
         return self.handler
 
@@ -47,9 +54,10 @@ class Kernel:
         return self.scheduler
 
     def startUp(self):
-        self.getCpu().start()
-        self.getClock().start()
+        self.getClock().startUp()
         
+    def shutDown(self):
+        self.getClock().shutDown()
 
     def run(self, name):
         self.handler.newIrq(name)

@@ -17,6 +17,9 @@ class Pcb():
     def toExit(self):
         self.status = Status.EXIT
 
+    def toRunning(self):
+	self.status = Status.RUNNING
+
     def pcIncrease(self):
         self.displacement = self.displacement + 1
 

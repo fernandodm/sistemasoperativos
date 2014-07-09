@@ -4,5 +4,5 @@ class Setting():
 		self.continuousAssignment = aContinuousAssignment
 
 
-	#def addBlock(self, aBlock):
+	def addBlock(self, aBlock):
 

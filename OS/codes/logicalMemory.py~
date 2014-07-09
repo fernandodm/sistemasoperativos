@@ -31,7 +31,7 @@ class LogicalMemory():
 	def deleteTakenBlock(self,aPid):
 		block = self.getTakenBlocks()[aPid]
 		self.allocFreeBlock(block.getBase(),block.getSize())
-		del self.getTakenBlocks()[aPid]
+		del self.getFreeBlocks()[aPid]
 
 	#PRECOND:
 	#Se le pasa una base que acierte con un bloque libre y que entre el tamano en dicho bloque

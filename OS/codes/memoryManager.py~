@@ -13,4 +13,4 @@ class MemoryManager:
 		pass
 
 	def deleteDataForPcb(self, aPcb):
-		self.logicalMemory.deleteTakenBlock(aPcb.getPid())
+		

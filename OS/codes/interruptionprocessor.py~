@@ -12,4 +12,5 @@ class InterruptionProcessor():
 	    print "entre en el while interruption"
             #saca un evento
             event = self.handler.popEvent()
+	    print "saque el evento "+event.pcbOrName
             self.routines.execute(event)

@@ -1,8 +1,8 @@
 class Cpu(): 
     
-    def __init__(self, aMemory, aHandler, aSem):
+    def __init__(self, aMemoryManager, aHandler, aSem):
         self.currentPcb = None
-        self.memory = aMemory
+        self.memoryManager = aMemoryManager
         self.handler = aHandler
         self.quantum = 0
         self.roundRobin = 3
@@ -26,7 +26,7 @@ class Cpu():
     def execute(self):
         
         #agarra instruccion de memoria por donde va
-        instruction =self.memory.getCells()[self.currentPcb.programCounter()]
+        instruction =self.memoryManager.getInstruction(self.currentPcb.getPid(),self.currentPcb.displacement)
         #si expiro el quantum entonces..
         #WAIT/TIMEOUT           
         if(self.quantum == self.roundRobin):
@@ -49,7 +49,6 @@ class Cpu():
         #por lo cual..
         #KILL
         elif(instruction.execute()):
-            
             #le manda el pcb al handler para que lo mate
             #el handler se ocupa de delegar el contentSwitching
             self.handler.toKill(self.currentPcb)
@@ -64,10 +63,8 @@ class Cpu():
     def run(self):
         
         if(self.havePcb()):
-
             #LUCHA POR EL SEMAFORO
             self.semaphore.acquire()
-
             if(self.havePcb()):
                 self.execute()
 

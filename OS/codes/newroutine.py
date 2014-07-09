@@ -7,6 +7,7 @@ class NewRoutine():#Routine):
 
 
     def run(self, irq):
+	print "entre en el run de new routine"
         #busca programa en disco
         prog = self.kernel.getDisc().getProgram(irq.getName())
         sizeProg = prog.getSize()

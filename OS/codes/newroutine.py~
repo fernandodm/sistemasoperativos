@@ -9,7 +9,6 @@ class NewRoutine():#Routine):
     def run(self, irq):
         #busca programa en disco
         prog = self.kernel.getDisc().getProgram(irq.getName())
-        #pregunta a disco en donde poner el programa
         sizeProg = prog.getSize()
 
         #lo pone en memoria principal y agarra la direccion base
