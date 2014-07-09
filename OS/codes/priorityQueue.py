@@ -21,23 +21,26 @@ class PriorityQueue():
     def getMax(self):
 
         self.cleanChances()
-        tabla = self.table
-        clavesDadasVuelta = list(reversed(sorted(tabla.keys())))
-        ultimaChance = tabla.get(clavesDadasVuelta[0])
-        
-        nroUltimaChance = (self.chances * self.priority) - 1
+        if(len(self.table)>0):
+            tabla = self.table
+            clavesDadasVuelta = list(reversed(sorted(tabla.keys())))
+            ultimaChance = tabla.get(clavesDadasVuelta[0])
+            
+            nroUltimaChance = (self.chances * self.priority) - 1
 
-        for i in clavesDadasVuelta:
-            if(i != nroUltimaChance):
-                if(i == nroUltimaChance - 1):
-                    tabla[i+1] = tabla.get(i).fusionarCon(tabla.get(i+1))
+            for i in clavesDadasVuelta:
+                if(i != nroUltimaChance):
+                    if(i == nroUltimaChance - 1):
+                        tabla[i+1] = tabla.get(i).fusionarCon(tabla.get(i+1))
 
-                else:
-                    tabla[i+1] = tabla.get(i)
+                    else:
+                        tabla[i+1] = tabla.get(i)
 
-                tabla.pop(i)
+                    tabla.pop(i)
 
-        return ultimaChance.getMax()
+            return ultimaChance.getMax()
+        else:
+            return None
                     
         
     def cleanChances(self):
