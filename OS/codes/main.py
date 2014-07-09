@@ -1,3 +1,4 @@
+import threading, time
 from badwaysetting import BadWaySetting
 from bestsetting import BestSetting
 from block import Block
@@ -55,4 +56,5 @@ kernel.startUp()
 kernel.run("Programa 1")
 kernel.run("Programa 2")
 kernel.run("Programa 3")
+time.sleep(20)
 kernel.shutDown()
