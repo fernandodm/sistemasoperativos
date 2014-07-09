@@ -7,9 +7,7 @@ class InterruptionProcessor():
 
     def execute(self):
         #mientras la cola de eventos tenga elementos
-	print "execute de interruption"
         while(self.handler.isNotEmpty()):
-	    print "entre en el while interruption"
             #saca un evento
             event = self.handler.popEvent()
             self.routines.execute(event)

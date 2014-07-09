@@ -25,7 +25,6 @@ class Clock(threading.Thread):
         
     def notify(self):
         for susc in self.suscribed:
-	    print susc
             susc.run()
 
     def run(self):

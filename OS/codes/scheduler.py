@@ -11,11 +11,9 @@ class Scheduler():
 
     def addPcb(self, pcb):
 	if(self.currentQueue.size()==0 and not(self.cpu.havePcb())):
-		print "se lo pase directamente al cpu"
 		pcb.toRunning()
 		self.cpu.assignPcb(pcb)
 	else:
-		print "lo puse en cola de ready"
         	self.currentQueue.addPcb(pcb)
 
     def setFIFOMode(self):

@@ -41,7 +41,18 @@ instructions = [instruction1,instruction2,instruction3]
 prog1 = Program("Programa 1",instructions)
 ##########################################
 
+prog2 = Program("Programa 2",instructions)
+##########################################
+
+prog3 = Program("Programa 3",instructions)
+##########################################
+
 kernel.getDisc().addProgram(prog1)
+kernel.getDisc().addProgram(prog2)
+kernel.getDisc().addProgram(prog3)
 
 kernel.startUp()
 kernel.run("Programa 1")
+kernel.run("Programa 2")
+kernel.run("Programa 3")
+kernel.shutDown()

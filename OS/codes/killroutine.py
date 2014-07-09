@@ -10,4 +10,5 @@ class KillRoutine():#Routine):
         self.kernel.getMemoryManager().deleteDataForPcb(irq.getPcb())
         #le asigna un nuevo pcb a cpu
         pcb = self.kernel.getScheduler().getNextPcb()
+
         self.kernel.getCpu().assignPcb(pcb)

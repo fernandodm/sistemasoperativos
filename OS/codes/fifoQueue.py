@@ -11,4 +11,7 @@ class FifoQueue():
         self.queue.put(aPcb)
 
     def getMax(self):
-        return self.queue.get()
+    	if not(self.queue.empty()):
+        	return self.queue.get()
+        else:
+        	return None
