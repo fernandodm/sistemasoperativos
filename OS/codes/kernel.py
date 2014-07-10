@@ -13,7 +13,7 @@ class Kernel:
     def __init__(self, aSem, aSize):
         self.disc = Disc()
         self.memory = MainMemory(aSize)
-        self.memoryManager = ContinuousAssignment(LogicalMemory(self.memory))
+        self.memoryManager = ContinuousAssignment(LogicalMemory(self.memory),self)
         self.handler = InterruptionHandler(aSem,self)
         self.cpu = Cpu(self.memoryManager,self.handler, aSem)
         self.scheduler = Scheduler(self.cpu)        
@@ -22,6 +22,7 @@ class Kernel:
         self.clock.addSuscribed(self.cpu)
         self.clock.addSuscribed(self.IO)
         self.clock.addSuscribed(self.handler)
+        self.table = {}
 
     def getLogicalMemory(self):
         return self.logicalMemory
@@ -34,7 +35,7 @@ class Kernel:
 
     def getCpu(self):
         return self.cpu
-    
+
     def getMemory(self):
         return self.memory
 
@@ -55,12 +56,21 @@ class Kernel:
 
     def startUp(self):
         self.getClock().startUp()
-        
+    
+    def getTable(self):
+        return self.table
+
     def shutDown(self):
         self.getClock().shutDown()
 
     def run(self, name):
         self.handler.newIrq(name)
-        
+
     def getProgramasDelDisco(self, name):
         return self.getDisc().getProgram(name)
+
+    def addPcb(self,aPcb):
+        self.table[aPcb.getPid()] = aPcb
+
+    def removePcb(self,aPcb):
+        del self.table[aPcb.getPid()]

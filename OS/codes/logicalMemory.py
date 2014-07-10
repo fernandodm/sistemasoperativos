@@ -45,7 +45,9 @@ class LogicalMemory():
 				if(freeBlock.getBase() == aBase & freeBlock.getSize() == aSize):
 					del self.getFreeBlocks()[cont]
 				else:
-					newBlock = Block((aBase+aSize+1),freeBlock.getFinish())
+					print("llalalallala "+str(aBase+aSize))
+					newBlock = Block((aBase+aSize),(freeBlock.getFinish()-(aBase+aSize)))
+					print "TAMANOO DEL BLOQUE NUEVO Y USADO "+str(newBlock.getSize())
 					self.getFreeBlocks()[cont] = newBlock
 				break
 			cont += 1
@@ -74,3 +76,25 @@ class LogicalMemory():
 
 	def getTakenBlocks(self):
 		return self.takenBlocks
+
+	def freeBlock(self, aSize,aKernel):
+		old = None
+		aPid = None
+		table = aKernel.getTable()
+		for pid in list(table.keys()):
+			currentOld = table[pid].getOld()
+			currentPid = pid
+			if(old == None):
+				old = currentOld
+				aPid = currentPid
+			else:
+				if(old < currentOld):
+					old = currentOld
+					aPid = currentPid
+		instructions = []
+		block = self.getTakenBlocks()[aPid]
+		for cellInstr in range(block.getBase(),block.getFinish()+1):
+			instructions.append(aKernel.getMemory().getDataOfCell(cellInstr))
+		aKernel.getDisc().saveIntructions(aPid,instructions)
+		self.deleteTakenBlock(aPid)
+		del table[aPid]

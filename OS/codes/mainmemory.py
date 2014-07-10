@@ -12,6 +12,8 @@ class MainMemory():
     #el numero cell no debe excederse del tamano de la memoria
     def putDataInCell(self,data,cell):
         #si la celda existe la suscribe
+        print(cell)
+        print(self.cells)
         self.cells[cell] = data
 
     #PRECOND: 

@@ -1,7 +1,6 @@
 class Disc():
     def __init__(self):
         self.cells = []
-        self.instructions = {}
 
     def getCells(self):
         return self.cells
@@ -15,5 +14,3 @@ class Disc():
             if(index.getName()==name):
                 return index
             
-    def saveIntructions(self,aPid,instructions):
-        self.instructions[aPid] = instructions

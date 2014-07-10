@@ -13,10 +13,13 @@ class NewRoutine():#Routine):
         sizeProg = prog.getSize()
 
         #lo pone en memoria principal y agarra la direccion base
+        print "ejecuta putData"
         self.kernel.getMemoryManager().putData(irq.getPid(), prog.getInstructions())
 
         #crea pcb con prioridad uno como default, despues se podra cambiar
         p = Pcb(irq.getPid(), sizeProg,1)
+
+	self.kernel.addPcb(p)
 
 
         #pone pcb en estado ready y lo coloca en cola ready

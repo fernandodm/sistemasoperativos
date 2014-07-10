@@ -9,5 +9,5 @@ class InterruptionProcessor():
         #mientras la cola de eventos tenga elementos
         while(self.handler.isNotEmpty()):
             #saca un evento
-            event = self.handler.popEvent()
+            event = self.handler.popFirstEvent()
             self.routines.execute(event)

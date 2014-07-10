@@ -23,3 +23,7 @@ class Block():
 
 	def take(self):
 		self.free = False
+
+	def fusion(self,otherBlock):
+		self.size += otherBlock.getSize()
+		self.finish = self.getBase()+self.getSize()

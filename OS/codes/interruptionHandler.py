@@ -23,8 +23,10 @@ class InterruptionHandler:
      def isNotEmpty(self):
           return (len(self.eventQueue) > 0)
 
-     def popEvent(self):
-          return self.eventQueue.pop()
+     def popFirstEvent(self):
+          event = self.eventQueue[0]
+          self.eventQueue.remove(event)
+          return event
 
      def newIrq(self, aName):
           irq = Irq(aName,Interruption.NEW, self.pid)

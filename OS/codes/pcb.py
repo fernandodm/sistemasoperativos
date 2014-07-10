@@ -1,30 +1,34 @@
 from status import Status
 
 class Pcb():
-    def __init__(self, aPid, aSize, aPriority):
-        self.pid = aPid
-        self.displacement = 0
-        self.size = aSize
-        self.status = Status.NEW
-        self.priority = aPriority
+  def __init__(self, aPid, aSize, aPriority):
+    self.pid = aPid
+    self.displacement = 0
+    self.size = aSize
+    self.status = Status.NEW
+    self.priority = aPriority
+    self.old = 0
 
-    def getSize(self):
-        return self.size    
+  def getOld(self):
+    return self.old
 
-    def getPid(self):
-	return self.pid
+  def getSize(self):
+    return self.size    
 
-    def pasarAReady(self):
-        self.status = Status.READY
+  def getPid(self):
+    return self.pid
 
-    def toExit(self):
-        self.status = Status.EXIT
+  def pasarAReady(self):
+    self.status = Status.READY
 
-    def toRunning(self):
-	self.status = Status.RUNNING
+  def toExit(self):
+    self.status = Status.EXIT
 
-    def pcIncrease(self):
-        self.displacement = self.displacement + 1
+  def toRunning(self):
+    self.status = Status.RUNNING
 
-    def getPriority(self):
-        return self.priority
+  def pcIncrease(self):
+    self.displacement = self.displacement + 1
+
+  def getPriority(self):
+    return self.priority
