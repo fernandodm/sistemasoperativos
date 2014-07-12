@@ -17,13 +17,12 @@ class MemoryManager:
 		pass
 
 	def putData(self, aPid, instructionsList):
-		print "estoy en putData"
 		if(self.thereIsSpace(len(instructionsList))):
-			print "tengo espacio"
+			print "[MemoryManager] Hay espacio en memoria, agregando.."
 			self.putDataCont(aPid, instructionsList)
 		else:
-			print "no tngo espacio"
-			#self.swapPcb(aPid,instructionsList)
+			print "[MemoryManager] No hay espacio en memoria, swaping"
+			self.swapPcb(aPid,instructionsList)
 
 	def deleteDataForPcb(self, aPcb):
 		self.logicalMemory.deleteTakenBlock(aPcb.getPid())

@@ -1,3 +1,4 @@
+ 
 from interruption import Interruption
 from mainmemory import MainMemory
 from scheduler import Scheduler
@@ -64,6 +65,7 @@ class Kernel:
         self.getClock().shutDown()
 
     def run(self, name):
+        print("[Kernel] Ejecutar programa: " + str(name))
         self.handler.newIrq(name)
 
     def getProgramasDelDisco(self, name):

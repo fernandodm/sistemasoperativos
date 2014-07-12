@@ -45,9 +45,7 @@ class LogicalMemory():
 				if(freeBlock.getBase() == aBase & freeBlock.getSize() == aSize):
 					del self.getFreeBlocks()[cont]
 				else:
-					print("llalalallala "+str(aBase+aSize))
 					newBlock = Block((aBase+aSize),(freeBlock.getFinish()-(aBase+aSize)))
-					print "TAMANOO DEL BLOQUE NUEVO Y USADO "+str(newBlock.getSize())
 					self.getFreeBlocks()[cont] = newBlock
 				break
 			cont += 1
@@ -77,6 +75,8 @@ class LogicalMemory():
 	def getTakenBlocks(self):
 		return self.takenBlocks
 
+	#Libera el bloque del pcb menos recientemente utilizado
+	#para que pueda ser reemplazado por el nuevo
 	def freeBlock(self, aSize,aKernel):
 		old = None
 		aPid = None
@@ -88,13 +88,23 @@ class LogicalMemory():
 				old = currentOld
 				aPid = currentPid
 			else:
-				if(old < currentOld):
+				if(old < currentOld or aKernel.getCpu().currentPcb.pid == aPid):
 					old = currentOld
 					aPid = currentPid
+
+		self.savePcbToDisc(aPid, aKernel)
+		self.removeDataPcb(aPid, aKernel, table)
+		
+	#Borra los datos del pcb
+	def removeDataPcb(self, aPid, aKernel, aTable):
+		self.deleteTakenBlock(aPid)
+		del aTable[aPid]
+		aKernel.getScheduler().removePid()
+
+	#guarda las instrucciones del pcb al disco
+	def savePcbToDisc(self, aPid, aKernel):
 		instructions = []
 		block = self.getTakenBlocks()[aPid]
-		for cellInstr in range(block.getBase(),block.getFinish()+1):
+		for cellInstr in range(block.getBase(),block.getFinish()):
 			instructions.append(aKernel.getMemory().getDataOfCell(cellInstr))
 		aKernel.getDisc().saveIntructions(aPid,instructions)
-		self.deleteTakenBlock(aPid)
-		del table[aPid]

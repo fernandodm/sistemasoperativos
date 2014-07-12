@@ -12,5 +12,5 @@ class Instruction():
 		return self.isFinal
 
 	def execute(self):
-		print(self.content)
+		print("[Intruccion] "+ str(self.content))
 		return self.isFinal

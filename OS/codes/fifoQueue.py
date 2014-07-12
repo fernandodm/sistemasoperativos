@@ -15,3 +15,6 @@ class FifoQueue():
         	return self.queue.get()
         else:
         	return None
+
+    def removePid(self):
+        self.queue.get()

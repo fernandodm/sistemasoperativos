@@ -19,6 +19,5 @@ class ContinuousAssignment(MemoryManager):
 			#busco si hay un bloque con tamanho >= a aSize
 			for block in freeBlocks:
 				if(block.getSize() >= aSize):
-					print("taaaaaammmm"+str(block.getSize()))
 					return True
 		return False

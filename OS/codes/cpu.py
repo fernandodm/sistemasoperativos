@@ -28,7 +28,8 @@ class Cpu():
         #agarra instruccion de memoria por donde va
         instruction =self.memoryManager.getInstruction(self.currentPcb.getPid(),self.currentPcb.displacement)
         #si expiro el quantum entonces..
-        #WAIT/TIMEOUT           
+        #WAIT/TIMEOUT  
+        print "[CPU] Ejecutar instruccion.."         
         if(self.quantum == self.roundRobin):
             # le dice al handler que lo ponga en wait
             #el handler se ocupa de delegar el contentSwitching
@@ -66,6 +67,7 @@ class Cpu():
             #LUCHA POR EL SEMAFORO
             self.semaphore.acquire()
             if(self.havePcb()):
+                self.currentPcb.old += 1 
                 self.execute()
 
             #DEVUELVE EL SEMAFORO
