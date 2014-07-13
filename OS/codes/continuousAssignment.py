@@ -1,6 +1,7 @@
 from memoryManager import MemoryManager
 from firstsetting import FirstSetting
 from block import Block
+from pcb import Pcb
 
 class ContinuousAssignment(MemoryManager):
 
@@ -21,3 +22,23 @@ class ContinuousAssignment(MemoryManager):
 				if(block.getSize() >= aSize):
 					return True
 		return False
+
+	#Agrega instrucciones del disco a la memoria y
+	#se vuelve a poner el pcb en la cola
+	def addIntructionsForTheDisc(self):
+		#Obtnego la tabla de de instrucciones 
+		tableSwap = self.kernel.getDisc().getInstructions()
+		pids = tableSwap.keys()
+		pid = pids[0]
+		#Obtengo las instrucciones del proceso
+		instructions = tableSwap[pid]
+		sizeInstructions = len(instructions)
+		#si hay espacio vuelve a memoria
+		if(self.thereIsSpace(sizeInstructions)):
+			p = Pcb(pid, sizeInstructions,1)
+			self.kernel.addPcb(p)
+			p.pasarAReady()
+			self.kernel.getScheduler().addPcb(p)
+			self.putDataCont(pid, instructions)
+			#elimino las isntrucciones del disco
+			del self.kernel.getDisc().getInstructions()[pid]

@@ -3,6 +3,9 @@ class Disc():
         self.cells = []
         self.instructions = {}
 
+    def getInstructions(self):
+        return self.instructions
+
     def getCells(self):
         return self.cells
 

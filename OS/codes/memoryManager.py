@@ -16,6 +16,9 @@ class MemoryManager:
 	def putDataCont(self, aPid, instructionsList):
 		pass
 
+	def addIntructionsForTheDisc(self):
+		pass
+
 	def putData(self, aPid, instructionsList):
 		if(self.thereIsSpace(len(instructionsList))):
 			print "[MemoryManager] Hay espacio en memoria, agregando.."

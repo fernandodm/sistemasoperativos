@@ -46,9 +46,14 @@ instruction7 = Instruction("{Programa 3} primer instruccion",False,False)
 instruction8 = Instruction("{Programa 3} segunda instruccion",False,False)
 instruction9 = Instruction("{Programa 3} tercer instruccion",False,True)
 
+instruction10 = Instruction("{Programa 4} primer instruccion",False,False)
+instruction11 = Instruction("{Programa 4} segunda instruccion",False,False)
+instruction12 = Instruction("{Programa 4} tercer instruccion",False,True)
+
 instructionsP1 = [instruction1,instruction2,instruction3]
 instructionsP2 = [instruction4,instruction5,instruction6]
 instructionsP3 = [instruction7,instruction8,instruction9]
+instructionsP4 = [instruction10,instruction11,instruction12]
 
 prog1 = Program("Programa 1",instructionsP1)
 ##########################################
@@ -59,13 +64,18 @@ prog2 = Program("Programa 2",instructionsP2)
 prog3 = Program("Programa 3",instructionsP3)
 ##########################################
 
+prog4 = Program("Programa 4",instructionsP4)
+##########################################
+
 kernel.getDisc().addProgram(prog1)
 kernel.getDisc().addProgram(prog2)
 kernel.getDisc().addProgram(prog3)
+kernel.getDisc().addProgram(prog4)
 
 kernel.startUp()
 kernel.run("Programa 1")
 kernel.run("Programa 3")
 kernel.run("Programa 2")
+kernel.run("Programa 4")
 time.sleep(20)
 kernel.shutDown()
