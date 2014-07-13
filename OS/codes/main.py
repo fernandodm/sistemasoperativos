@@ -34,29 +34,29 @@ kernel = Kernel(semaphore,size)
 
 #########################################
 #########################################
-instruction1 = Instruction("primer instruccionP1",False,False)
-instruction2 = Instruction("segunda instruccionP1",False,False)
-instruction3 = Instruction("tercer instruccionP1",False,True)
+instruction1 = Instruction("{Programa 1} primer instruccion",False,False)
+instruction2 = Instruction("{Programa 1} segunda instruccion",False,False)
+instruction3 = Instruction("{Programa 1} tercer instruccion",False,True)
 
-instructionp1 = Instruction("primer instruccionP2",False,False)
-instructionp2 = Instruction("segunda instruccionP2",False,False)
-instructionp3 = Instruction("tercer instruccionP2",False,True)
+instruction4 = Instruction("{Programa 2} primer instruccion",False,False)
+instruction5 = Instruction("{Programa 2} segunda instruccion",False,False)
+instruction6 = Instruction("{Programa 2} tercer instruccion",False,True)
 
-instruction14 = Instruction("primer instruccionP3",False,False)
-instruction24 = Instruction("segunda instruccionP3",False,False)
-instruction34 = Instruction("tercer instruccionP3",False,True)
+instruction7 = Instruction("{Programa 3} primer instruccion",False,False)
+instruction8 = Instruction("{Programa 3} segunda instruccion",False,False)
+instruction9 = Instruction("{Programa 3} tercer instruccion",False,True)
 
-instructions = [instruction1,instruction2,instruction3]
-instruc = [instructionp1,instructionp2,instructionp3]
-ins = [instruction14,instruction24,instruction34]
+instructionsP1 = [instruction1,instruction2,instruction3]
+instructionsP2 = [instruction4,instruction5,instruction6]
+instructionsP3 = [instruction7,instruction8,instruction9]
 
-prog1 = Program("Programa 1",instructions)
+prog1 = Program("Programa 1",instructionsP1)
 ##########################################
 
-prog2 = Program("Programa 2",instruc)
+prog2 = Program("Programa 2",instructionsP2)
 ##########################################
 
-prog3 = Program("Programa 3",ins)
+prog3 = Program("Programa 3",instructionsP3)
 ##########################################
 
 kernel.getDisc().addProgram(prog1)
