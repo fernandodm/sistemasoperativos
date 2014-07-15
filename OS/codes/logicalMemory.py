@@ -82,6 +82,7 @@ class LogicalMemory():
 		aPid = None
 		table = aKernel.getTable()
 		for pid in list(table.keys()):
+			print "entre al for del freeBlock en LogicalMemory"
 			currentOld = table[pid].getOld()
 			currentPid = pid
 			if(old == None):
@@ -93,12 +94,14 @@ class LogicalMemory():
 					aPid = currentPid
 
 		self.savePcbToDisc(aPid, aKernel)
+		print "pasa el save de LogicalMemory"
 		self.removeDataPcb(aPid, aKernel, table)
 		
 	#Borra los datos del pcb
 	def removeDataPcb(self, aPid, aKernel, aTable):
 		self.deleteTakenBlock(aPid)
 		del aTable[aPid]
+		print "borre el pcb de la tabla"
 		aKernel.getScheduler().removePid()
 
 	#guarda las instrucciones del pcb al disco

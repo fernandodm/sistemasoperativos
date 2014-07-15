@@ -8,6 +8,8 @@ class KillRoutine():#Routine):
         self.kernel.getCpu().removePcb()
         #mata el pcb del kernel
         self.kernel.removePcb(irq.getPcb())
+        #pone el pcb en estado END
+        irq.getPcb().toExit()
         #mata el pcb de memoria
         self.kernel.getMemoryManager().deleteDataForPcb(irq.getPcb())
         #le asigna un nuevo pcb a cpu

@@ -23,10 +23,12 @@ class MemoryManager:
 		if(self.thereIsSpace(len(instructionsList))):
 			print "[MemoryManager] Hay espacio en memoria, agregando.."
 			self.putDataCont(aPid, instructionsList)
+			return True
 		else:
 			print "[MemoryManager] No hay espacio en memoria, swaping"
 			handler = self.kernel.getHandler()
 			handler.toSwapIn(aPid, instructionsList)
+			return False
 			#self.swapPcb(aPid,instructionsList)
 
 	def deleteDataForPcb(self, aPcb):
@@ -34,6 +36,7 @@ class MemoryManager:
 
 	def swapPcb(self,aPid,instructionList):
 		self.logicalMemory.freeBlock(len(instructionList),self.kernel)
+		print "[MemoryManager] se ejecuto el freeBlock del logicalMemory"
 		self.putData(aPid,instructionList)
 		
 

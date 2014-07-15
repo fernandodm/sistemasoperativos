@@ -6,4 +6,5 @@ class SwapInRoutine():
 
     def run(self, irq):
     	memoryManager = self.kernel.getMemoryManager()
-    	memoryManager.swapPcb(irq.getPid(),irq.getPcb())#getPcb seria las instrucciones
+    	print "se hace el run del swap in"
+    	memoryManager.swapPcb(irq.getPid(),irq.getInstructions())

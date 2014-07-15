@@ -20,4 +20,5 @@ class FifoQueue():
         	return None
 
     def removePid(self):
+        print self.size()
         self.queue.get()

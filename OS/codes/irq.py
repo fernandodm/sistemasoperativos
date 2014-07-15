@@ -1,7 +1,7 @@
 class Irq():
-    def __init__(self, aPcbOrName, aType, aPid):
+    def __init__(self, aDataPcb, aType, aPid):
         #para tipo new esto va a ser un nombre
-        self.pcbOrName = aPcbOrName
+        self.dataPcb = aDataPcb
         self.type = aType
         #el pid solo lo va a precisar el tipo new
         self.pid = aPid
@@ -10,10 +10,13 @@ class Irq():
         return self.pid
 
     def getPcb(self):
-        return self.pcbOrName
+        return self.dataPcb
 
     def getName(self):
-        return self.pcbOrName
+        return self.dataPcb
+
+    def getInstructions(self):
+        return self.dataPcb
 
     def getType(self):
         return self.type

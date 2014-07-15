@@ -27,6 +27,12 @@ class Pcb():
   def toRunning(self):
     self.status = Status.RUNNING
 
+  def toWait(self):
+    self.status = Status.WAITING
+
+  def toExit(self):
+    self.status = Status.EXIT
+
   def pcIncrease(self):
     self.displacement = self.displacement + 1
 
