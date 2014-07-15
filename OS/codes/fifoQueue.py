@@ -4,6 +4,9 @@ class FifoQueue():
     def __init__(self):
         self.queue = Queue()
 
+    def isEmpty(self):
+        return self.queue.empty()
+
     def size(self):
     	return self.queue.qsize()
 

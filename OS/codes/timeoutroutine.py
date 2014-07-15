@@ -5,11 +5,12 @@ class TimeOutRoutine():#Routine):
 
     def run(self,irq):
         #sacar el pcb de cpu
-        self.kernel.getCpu().removePcb(irq.getPcb())
+        self.kernel.getCpu().removePcb()
         #poner el pcb en cola ready
         self.kernel.getScheduler().addPcb(irq.getPcb())
         #pide al scheduler un pcb
-        aPcb = self.kernel.getScheduler().getMax()
-	if(aPcb != None):
+        aPcb = self.kernel.getScheduler().getNextPcb()
+
+        if(aPcb != None):
         	#asigna el pcb al cpu
         	self.kernel.getCpu().assignPcb(aPcb)

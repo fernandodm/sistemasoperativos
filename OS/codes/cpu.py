@@ -5,7 +5,7 @@ class Cpu():
         self.memoryManager = aMemoryManager
         self.handler = aHandler
         self.quantum = 0
-        self.roundRobin = 3
+        self.roundRobin = 2
         self.semaphore = aSem
 
     def changeRoundRobin(self, nro):

@@ -4,17 +4,19 @@ from priorityQueue import PriorityQueue
 class Scheduler():
     def __init__(self, aCpu):
         self.currentQueue = FifoQueue()
-	self.cpu = aCpu
+        self.cpu = aCpu
 
     def getNextPcb(self):
         return self.currentQueue.getMax()
 
     def addPcb(self, pcb):
-	if(self.currentQueue.size()==0 and not(self.cpu.havePcb())):
-		pcb.toRunning()
-		self.cpu.assignPcb(pcb)
-	else:
-        	self.currentQueue.addPcb(pcb)
+        if(self.currentQueue.isEmpty() and not(self.cpu.havePcb())):
+            pcb.toRunning()
+            self.cpu.assignPcb(pcb)
+            print "fui directamente a cpu"
+        else:
+            self.currentQueue.addPcb(pcb)
+            print "puse en queue y quedo tamanio "+str(self.currentQueue.size())
 
     def setFIFOMode(self):
         self.currentQueue = FifoQueue()

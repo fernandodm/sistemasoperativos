@@ -29,16 +29,17 @@ class ContinuousAssignment(MemoryManager):
 		#Obtnego la tabla de de instrucciones 
 		tableSwap = self.kernel.getDisc().getInstructions()
 		pids = tableSwap.keys()
-		pid = pids[0]
+		#pid = pids[0]
 		#Obtengo las instrucciones del proceso
-		instructions = tableSwap[pid]
-		sizeInstructions = len(instructions)
-		#si hay espacio vuelve a memoria
-		if(self.thereIsSpace(sizeInstructions)):
-			p = Pcb(pid, sizeInstructions,1)
-			self.kernel.addPcb(p)
-			p.pasarAReady()
-			self.kernel.getScheduler().addPcb(p)
-			self.putDataCont(pid, instructions)
-			#elimino las isntrucciones del disco
-			del self.kernel.getDisc().getInstructions()[pid]
+		for pid in pids:
+			instructions = tableSwap[pid]
+			sizeInstructions = len(instructions)
+			#si hay espacio vuelve a memoria
+			if(self.thereIsSpace(sizeInstructions)):
+				p = Pcb(pid, sizeInstructions,1)
+				self.kernel.addPcb(p)
+				p.pasarAReady()
+				self.kernel.getScheduler().addPcb(p)
+				self.putDataCont(pid, instructions)
+				#elimino las isntrucciones del disco
+				del self.kernel.getDisc().getInstructions()[pid]
