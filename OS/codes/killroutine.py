@@ -15,8 +15,15 @@ class KillRoutine():#Routine):
         pcb = self.kernel.getScheduler().getNextPcb()
 
         self.kernel.getCpu().assignPcb(pcb)
-        #verifico si hay instrucciones en disco para
-        #luego verificar si vuelve a memoria
+
+        #verifico si hay instrucciones en disco
+        #si hay, se lanzara una interrupcion de SwapOut
         pids = self.kernel.getDisc().getInstructions().keys()
         if(len(pids) > 0):
-            self.kernel.getMemoryManager().addIntructionsForTheDisc()
+            handler = self.kernel.getHandler()
+            handler.toSwapOut()
+        #verifico si hay instrucciones en disco para
+        #luego verificar si vuelve a memoria
+        #pids = self.kernel.getDisc().getInstructions().keys()
+        #if(len(pids) > 0):
+        #self.kernel.getMemoryManager().addIntructionsForTheDisc()

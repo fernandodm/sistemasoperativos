@@ -25,7 +25,9 @@ class MemoryManager:
 			self.putDataCont(aPid, instructionsList)
 		else:
 			print "[MemoryManager] No hay espacio en memoria, swaping"
-			self.swapPcb(aPid,instructionsList)
+			handler = self.kernel.getHandler()
+			handler.toSwapIn(aPid, instructionsList)
+			#self.swapPcb(aPid,instructionsList)
 
 	def deleteDataForPcb(self, aPcb):
 		self.logicalMemory.deleteTakenBlock(aPcb.getPid())

@@ -49,6 +49,14 @@ class InterruptionHandler:
           irq = Irq(aPcb,Interruption.IOOUTPUT, None)
           self.handler(irq)
 
+     def toSwapIn(self, aPid, instructionsList):
+          irq = Irq(instructionsList,Interruption.SWAPIN, aPid)
+          self.handler(irq)  
+
+     def toSwapOut(self):
+          irq = Irq(None,Interruption.SWAPOUT, None)
+          self.handler(irq)  
+
      def run(self):
           self.semaphore.acquire()
           self.interruptionProcessor.execute()

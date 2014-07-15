@@ -4,6 +4,8 @@ from killroutine import KillRoutine
 from timeoutroutine import TimeOutRoutine
 from iooutputroutine import IOOutputRoutine
 from ioinputroutine import IOInputRoutine
+from swapInRoutine import SwapInRoutine
+from swapOutRoutine import SwapOutRoutine
 
 #Clase abstracta
 #class Routine(): 
@@ -18,7 +20,7 @@ from ioinputroutine import IOInputRoutine
 class Routines():
 
     def __init__(self, aKernel):
-        self.routines = {Interruption.NEW: NewRoutine(aKernel), Interruption.KILL: KillRoutine(aKernel), Interruption.TIMEOUT: TimeOutRoutine(aKernel), Interruption.IOOUTPUT: IOInputRoutine(aKernel), Interruption.IOOUTPUT: IOOutputRoutine(aKernel)}
+        self.routines = {Interruption.NEW: NewRoutine(aKernel), Interruption.KILL: KillRoutine(aKernel), Interruption.TIMEOUT: TimeOutRoutine(aKernel), Interruption.IOOUTPUT: IOInputRoutine(aKernel), Interruption.IOOUTPUT: IOOutputRoutine(aKernel), Interruption.SWAPIN: SwapInRoutine(aKernel), Interruption.SWAPOUT: SwapOutRoutine(aKernel)}
 
     def getRoutines(self):
         return self.routines
