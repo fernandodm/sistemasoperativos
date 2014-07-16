@@ -16,7 +16,7 @@ class IO():
 
 	def receivePcb(self, aPcb):
 		self.queue.put(aPcb)
-		print self.queue
+		print "[IO] Se arego el pcb " + str(aPcb.getPid()) + " a la io"
 
 	def fetch(self):
 		return self.getQueue().get()
@@ -29,6 +29,7 @@ class IO():
 			#encuentra la intruccion actual
 			instruction = self.kernel.getMemoryManager().getInstruction(pcb.getPid(),pcb.displacement)
 			#la executa
+			print "[IO] Ejecutar instruccion.."
 			instruction.execute()
 			pcb.pcIncrease()
 			#crea la irq con el tipo iooutput

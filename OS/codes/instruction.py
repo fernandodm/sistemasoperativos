@@ -12,5 +12,8 @@ class Instruction():
 		return self.isFinal
 
 	def execute(self):
-		print("[Intruccion] "+ str(self.content))
+		if(self.isIOInstruction()):
+			print("[Intruccion] De IO "+ str(self.content))
+		else:
+			print("[Intruccion] De CPU "+ str(self.content))
 		return self.isFinal

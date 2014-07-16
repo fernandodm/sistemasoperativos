@@ -33,7 +33,7 @@ kernel = Kernel(memorySize)
 #########################################
 #########################################
 instruction1 = Instruction("{Programa 1} primer instruccion",False,False)
-instruction2 = Instruction("{Programa 1} segunda instruccion",False,False)
+instruction2 = Instruction("{Programa 1} segunda instruccion",True,False)
 instruction3 = Instruction("{Programa 1} tercer instruccion",False,True)
 
 instruction4 = Instruction("{Programa 2} primer instruccion",False,False)
