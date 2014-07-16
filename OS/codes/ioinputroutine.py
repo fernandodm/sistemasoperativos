@@ -5,6 +5,9 @@ class IOInputRoutine():
 
 		def run(self, aIrq):
 			#le saca el pcb al irq
-			pcb = aIrq.getNameOrPcb()
+			pcb = aIrq.getPcb()
+			self.kernel.getCpu().removePcb()
+			otherPcb = self.kernel.getScheduler().getNextPcb()
+			self.kernel.getCpu().assignPcb(otherPcb)
 			#le dice le pide al kernel el IO y le encola el pcb
-			self.kernel.getIO().receive(pcb)
+			self.kernel.getIO().receivePcb(pcb)

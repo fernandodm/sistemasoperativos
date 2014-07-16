@@ -1,6 +1,6 @@
-from kernel import Kernel
 from Queue import Queue
 from interruption import Interruption
+from irq import Irq
 
 class IO():
 
@@ -17,9 +17,10 @@ class IO():
 
 	def receivePcb(self, aPcb):
 		self.queue.put(aPcb)
+		print self.queue
 
 	def fetch(self):
-		return self.getQueue().pop()
+		return self.getQueue().get()
  
 	def run(self):
 		self.semaphore.acquire()
@@ -28,9 +29,10 @@ class IO():
 			#agarra el proximo pcb
 			pcb = self.fetch()
 			#encuentra la intruccion actual
-			instruction = self.kernel.getMemory().getCells()[pcb.programCounter()]
+			instruction = self.kernel.getMemoryManager().getInstruction(pcb.getPid(),pcb.displacement)
 			#la executa
 			instruction.execute()
+			pcb.pcIncrease()
 			#crea la irq con el tipo iooutput
 			irq = Irq(pcb,Interruption.IOOUTPUT,pcb.getPid())
 			#le manda la irq al handler

@@ -35,7 +35,7 @@ kernel = Kernel(semaphore,size)
 #kernel.getScheduler().setPriorityMode()
 #########################################
 #########################################
-instruction1 = Instruction("{Programa 1} primer instruccion",False,False)
+instruction1 = Instruction("{Programa 1} primer instruccion",True,False)
 instruction2 = Instruction("{Programa 1} segunda instruccion",False,False)
 instruction3 = Instruction("{Programa 1} tercer instruccion",False,True)
 

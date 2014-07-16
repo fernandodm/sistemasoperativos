@@ -43,7 +43,7 @@ class Cpu():
             #setea quantum en 0
             self.quantum = 0
             #le indica al hanlder que es de IO y le delega el contentSwitching
-            self.handler.toIO(self.currentPcb)
+            self.handler.toIOInput(self.currentPcb)
     
         #si la instruccion cuando se ejecuta nos da true
         #significa que es la ultima del proceso actual
