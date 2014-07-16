@@ -39,10 +39,11 @@ class ContinuousAssignment(MemoryManager):
 			sizeInstructions = len(instructions)
 			#si hay espacio vuelve a memoria
 			if(self.thereIsSpace(sizeInstructions)):
+				print "AAAAAAAAAAAAAHHHHHHHHHHHHHHHHHH"
 				p = Pcb(pid, sizeInstructions,1)
 				self.kernel.addPcb(p)
 				p.pasarAReady()
 				self.kernel.getScheduler().addPcb(p)
-				self.putDataCont(pid, instructions)
+				self.putData(pid, instructions)
 				#elimino las isntrucciones del disco
 				del self.kernel.getDisc().getInstructions()[pid]

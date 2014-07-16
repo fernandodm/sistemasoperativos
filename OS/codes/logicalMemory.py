@@ -12,12 +12,19 @@ class LogicalMemory():
 		newBlock = Block(aBase,aSize)
 		if(len(self.getFreeBlocks())==0):
 			self.freeBlocks.append(newBlock)
+			print "OPCION A"
 		else:
 			for block in self.getFreeBlocks():
 				if(block.getBase() == (aBase+aSize)):
+					print "OPCION B"
 					block.fusion(newBlock)
 				elif(block.getFinish() == aBase):
+					print "OPCION C"
 					newBlock.fusion(block)
+					adressOfBlock = self.freeBlocks.index(block)
+					self.freeBlocks[adressOfBlock] = newBlock
+					print newBlock.size
+		print "quedo el bloque libre : "+str(self.freeBlocks)+" y el primero con tamano: "+str(self.freeBlocks[0].getSize())
 
 	#PRECOND:
 	#El alocamiento de bloques no maneja colisiones
@@ -30,8 +37,13 @@ class LogicalMemory():
 	#el bloque a borrar debe existir
 	def deleteTakenBlock(self,aPid):
 		block = self.getTakenBlocks()[aPid]
+		print "AHHHHH BASEEE"+str(block.getBase())
+		print "OOOOHH SIZEEE"+str(block.getSize())
 		self.allocFreeBlock(block.getBase(),block.getSize())
 		del self.getTakenBlocks()[aPid]
+		print self.getTakenBlocks()
+		if(self.freeBlocks != []):
+			print self.freeBlocks[0].getSize()
 
 	#PRECOND:
 	#Se le pasa una base que acierte con un bloque libre y que entre el tamano en dicho bloque
@@ -56,6 +68,8 @@ class LogicalMemory():
 		self.allocTakenBlock(pid, base, size)
 		self.putDataInPhysicalMemory(base,instructionList)
 		print self.takenBlocks
+		if(self.freeBlocks != []):
+			print self.freeBlocks[0].getSize()
 
 	def putDataInPhysicalMemory(self, base, instructionList):
 		cell = base
@@ -83,7 +97,6 @@ class LogicalMemory():
 		aPid = None
 		table = aKernel.getTable()
 		for pid in list(table.keys()):
-			print "entre al for del freeBlock en LogicalMemory"
 			currentOld = table[pid].getOld()
 			currentPid = pid
 			if(old == None):
@@ -101,7 +114,6 @@ class LogicalMemory():
 	def removeDataPcb(self, aPid, aKernel, aTable):
 		self.deleteTakenBlock(aPid)
 		del aTable[aPid]
-		print "borre el pcb de la tabla"
 		aKernel.getScheduler().removePid(aPid)
 
 	#guarda las instrucciones del pcb al disco

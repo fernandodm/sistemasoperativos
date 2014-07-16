@@ -13,10 +13,8 @@ class Scheduler():
         if(self.currentQueue.isEmpty() and not(self.cpu.havePcb())):
             pcb.toRunning()
             self.cpu.assignPcb(pcb)
-            print "fui directamente a cpu"
         else:
             self.currentQueue.addPcb(pcb)
-            print "puse en queue y quedo tamanio "+str(self.currentQueue.size())
 
     def setFIFOMode(self):
         self.currentQueue = FifoQueue()

@@ -12,8 +12,6 @@ class TimeOutRoutine():
         self.kernel.getScheduler().addPcb(irq.getPcb())
         #pide al scheduler un pcb
         aPcb = self.kernel.getScheduler().getNextPcb()
-        print "PID salee" + str(irq.getPcb().getPid())
         if(aPcb != None):
-            print "PID entraa" + str(aPcb.getPid())
             #asigna el pcb al cpu
             self.kernel.getCpu().assignPcb(aPcb)
