@@ -32,7 +32,7 @@ semaphore = Semaphore(1)
 size = 6
 
 kernel = Kernel(semaphore,size)
-kernel.getScheduler().setPriorityMode()
+#kernel.getScheduler().setPriorityMode()
 #########################################
 #########################################
 instruction1 = Instruction("{Programa 1} primer instruccion",False,False)
@@ -78,7 +78,7 @@ kernel.run("Programa 1")
 kernel.run("Programa 2")
 kernel.run("Programa 3")
 kernel.run("Programa 4")
-time.sleep(5)
-kernel.table[3].changePriority(2)
-time.sleep(17)
+#time.sleep(5)
+#kernel.table[3].changePriority(2)
+time.sleep(20)
 kernel.shutDown()

@@ -75,4 +75,10 @@ class Kernel:
         self.table[aPcb.getPid()] = aPcb
 
     def removePcb(self,aPcb):
-        del self.table[aPcb.getPid()]
+        print "removePcb: " + str(aPcb.getPid())
+        print "table: " + str(self.table)
+        #guardo las keys para tener una lista
+        #y ver si esta vacia o no
+        keys = self.table.keys()
+        if(len(keys) != 0):
+            del self.table[aPcb.getPid()]

@@ -18,5 +18,5 @@ class Disc():
             if(index.getName()==name):
                 return index
             
-    def saveIntructions(self,aPid,instructions):
-        self.instructions[aPid] = instructions
+    def saveIntructions(self,aPcb,instructions):
+        self.instructions[aPcb] = instructions

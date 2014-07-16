@@ -106,20 +106,22 @@ class LogicalMemory():
 				if(old < currentOld or aKernel.getCpu().currentPcb.pid == aPid):
 					old = currentOld
 					aPid = currentPid
-
-		self.savePcbToDisc(aPid, aKernel)
+		pcb = aKernel.getTable()[aPid]
+		self.savePcbToDisc(pcb, aKernel)
 		self.removeDataPcb(aPid, aKernel, table)
 		
 	#Borra los datos del pcb
 	def removeDataPcb(self, aPid, aKernel, aTable):
 		self.deleteTakenBlock(aPid)
+		print"tablee: "+str(aTable) 
 		del aTable[aPid]
 		aKernel.getScheduler().removePid(aPid)
 
 	#guarda las instrucciones del pcb al disco
-	def savePcbToDisc(self, aPid, aKernel):
+	def savePcbToDisc(self, aPcb, aKernel):
+		print"SAVEE: "+str(aPcb.getPid())
 		instructions = []
-		block = self.getTakenBlocks()[aPid]
+		block = self.getTakenBlocks()[aPcb.getPid()]
 		for cellInstr in range(block.getBase(),block.getFinish()):
 			instructions.append(aKernel.getMemory().getDataOfCell(cellInstr))
-		aKernel.getDisc().saveIntructions(aPid,instructions)
+		aKernel.getDisc().saveIntructions(aPcb,instructions)
