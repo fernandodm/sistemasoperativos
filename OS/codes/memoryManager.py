@@ -28,6 +28,8 @@ class MemoryManager:
 			print "[MemoryManager] No hay espacio en memoria, swaping"
 			handler = self.kernel.getHandler()
 			handler.toSwapIn(aPid, instructionsList)
+			pcb = self.kernel.getTable()[aPid]
+			self.kernel.getScheduler().addPcb(pcb)
 			return False
 			#self.swapPcb(aPid,instructionsList)
 

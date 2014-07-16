@@ -15,7 +15,6 @@ class Cpu():
         self.currentPcb.pcIncrease()
 
     def assignPcb(self,pcb):
-        print "assignPcb "+ str(pcb.getPid())
         self.currentPcb = pcb
 
     def removePcb(self):
