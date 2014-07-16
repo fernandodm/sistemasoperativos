@@ -16,3 +16,10 @@ class Chance():
 
     def isEmpty(self):
         return len(self.elementos) == 0
+
+    def ifAppearDelete(self, pid):
+        for nro in range(len(self.elementos)):
+            if(self.elementos[nro].getPid() == pid):
+                del self.elementos[nro]
+                return True
+        return False

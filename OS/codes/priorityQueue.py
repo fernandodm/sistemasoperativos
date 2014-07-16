@@ -18,6 +18,10 @@ class PriorityQueue():
     def size(self):
         return len(self.table)
 
+    def isEmpty(self):
+        self.cleanChances()
+        return self.size() == 0
+
     def getMax(self):
 
         self.cleanChances()
@@ -50,4 +54,12 @@ class PriorityQueue():
             if(chance.isEmpty()):
                 del self.table[i]
                 
+    def removePid(self, aPid):
+
+        tabla = self.table
+        claves = list(tabla.keys())
+
+        for clave in claves:
+            if(tabla[clave].ifAppearDelete(aPid)):
+                break
     

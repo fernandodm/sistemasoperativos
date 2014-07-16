@@ -20,7 +20,7 @@ class Scheduler():
         self.currentQueue = FifoQueue()
 
     def setPriorityMode(self):
-        self.currentQueue = PriorityQueue()
+        self.currentQueue = PriorityQueue(3,3)
 
     def removePid(self, aPid):
         #hay q hacer el remove para priority

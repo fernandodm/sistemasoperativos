@@ -36,5 +36,8 @@ class Pcb():
   def pcIncrease(self):
     self.displacement = self.displacement + 1
 
+  def changePriority(self, integ):
+    self.priority = integ
+
   def getPriority(self):
     return self.priority
