@@ -1,12 +1,11 @@
 class Cpu(): 
     
-    def __init__(self, aMemoryManager, aHandler, aSem):
+    def __init__(self, aMemoryManager, aHandler):
         self.currentPcb = None
         self.memoryManager = aMemoryManager
         self.handler = aHandler
         self.quantum = 0
         self.roundRobin = 2
-        self.semaphore = aSem
 
     def changeRoundRobin(self, nro):
         self.roundRobin = nro
@@ -62,13 +61,6 @@ class Cpu():
             self.quantum += 1
 
     def run(self):
-        
         if(self.havePcb()):
-            #LUCHA POR EL SEMAFORO
-            self.semaphore.acquire()
-            if(self.havePcb()):
-                self.currentPcb.old += 1 
-                self.execute()
-
-            #DEVUELVE EL SEMAFORO
-            self.semaphore.release()   
+            self.currentPcb.old += 1 
+            self.execute() 

@@ -5,23 +5,19 @@ class NewRoutine():
     def __init__(self, aKernel):
         self.kernel = aKernel
 
-
     def run(self, irq):
-        print "[NewRoutine] Buscando programa en disco"
+        print "[NewRoutine] Buscando programa en disco.."
         #busca programa en disco
         prog = self.kernel.getDisc().getProgram(irq.getName())
         sizeProg = prog.getSize()
-
-        
+        print "[NewRoutine] Se encontro el programa: " + str(irq.getName())
         #crea pcb con prioridad uno como default, despues se podra cambiar
-        p = Pcb(irq.getPid(), sizeProg,1)
+        pcb = Pcb(irq.getPid(), sizeProg,1)
 
-        self.kernel.addPcb(p)
+        self.kernel.addPcb(pcb)
+        #lo pone en memoria principal y agarra la direccion base
         if(self.kernel.getMemoryManager().putData(irq.getPid(), prog.getInstructions())):
-            #lo pone en memoria principal y agarra la direccion base
-            print "[NewRoutine] Agregando instrucciones a memoria"
-
             #pone pcb en estado ready y lo coloca en cola ready
-            p.pasarAReady()
-            print "[NewRoutine] Agregando pcb a la cola ready"
-            self.kernel.getScheduler().addPcb(p)
+            pcb.pasarAReady()
+            self.kernel.getScheduler().addPcb(pcb)
+            print "[NewRoutine] Se agrego el pcb a la cola ready"

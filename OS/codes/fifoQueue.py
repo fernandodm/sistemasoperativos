@@ -19,10 +19,12 @@ class FifoQueue():
         else:
         	return None
 
+    #Agregar queue2 a la cola de ready
     def fillTo(self,queue2):
         while(not(queue2.empty())):
             self.queue.put(queue2.get())
 
+    #Elimina un determinado pcb de la cola
     def removePid(self, aPid):
         queue = Queue()
         pcbNotFound = True

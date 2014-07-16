@@ -4,8 +4,7 @@ from irq import Irq
 
 class IO():
 
-	def __init__(self,aKernel, aSem):
-		self.semaphore = aSem
+	def __init__(self,aKernel):
 		self.kernel = aKernel
 		self.queue = Queue()
 
@@ -23,7 +22,6 @@ class IO():
 		return self.getQueue().get()
  
 	def run(self):
-		self.semaphore.acquire()
 		#pregunta si hay elementos en su cola
 		if(not(self.queueisEmpty())):
 			#agarra el proximo pcb
@@ -37,4 +35,3 @@ class IO():
 			irq = Irq(pcb,Interruption.IOOUTPUT,pcb.getPid())
 			#le manda la irq al handler
 			self.kernel.getHandler().handler(irq)
-		self.semaphore.release()

@@ -26,16 +26,13 @@ from setting import Setting
 from status import Status
 from timeoutroutine import TimeOutRoutine
 
-from threading import Semaphore
+memorySize = 6
 
-semaphore = Semaphore(1)
-size = 6
-
-kernel = Kernel(semaphore,size)
+kernel = Kernel(memorySize)
 #kernel.getScheduler().setPriorityMode()
 #########################################
 #########################################
-instruction1 = Instruction("{Programa 1} primer instruccion",True,False)
+instruction1 = Instruction("{Programa 1} primer instruccion",False,False)
 instruction2 = Instruction("{Programa 1} segunda instruccion",False,False)
 instruction3 = Instruction("{Programa 1} tercer instruccion",False,True)
 

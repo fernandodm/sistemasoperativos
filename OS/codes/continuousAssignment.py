@@ -13,12 +13,13 @@ class ContinuousAssignment(MemoryManager):
 		cell = self.setting.getFreeCellWithSize(self.logicalMemory.getFreeBlocks(), len(instructionsList))
 		self.logicalMemory.putData(pid, cell, instructionsList)
 
+	#Devuelve True si hay espacio en memoria
 	def thereIsSpace(self, aSize):
-		#si hay bloques libres
 		cont = 0
 		freeBlocks = self.logicalMemory.getFreeBlocks()
+		#Si hay bloques libres
 		if(len(freeBlocks) > 0):
-			#busco si hay un bloque con tamanho >= a aSize
+			#Sumo el tamanho total de los bloques libres
 			for block in freeBlocks:
 				cont += block.getSize()
 
@@ -38,8 +39,9 @@ class ContinuousAssignment(MemoryManager):
 			sizeInstructions = len(instructions)
 			#si hay espacio vuelve a memoria
 			if(self.thereIsSpace(sizeInstructions)):
-				print "AAAAAAAAAAAAAHHHHHHHHHHHHHHHHHH"
+				print "[ContinuousAssignment] Agregando instrucciones del disco"
 				self.kernel.getScheduler().addPcb(pcb)
 				self.putData(pcb.getPid(), instructions)
 				#elimino las isntrucciones del disco
 				del self.kernel.getDisc().getInstructions()[pcb]
+				print "[ContinuousAssignment] Se elimino el proceso " + str(pcb.getPid()) + " del disco"

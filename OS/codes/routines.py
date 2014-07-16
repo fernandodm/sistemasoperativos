@@ -7,16 +7,6 @@ from ioinputroutine import IOInputRoutine
 from swapInRoutine import SwapInRoutine
 from swapOutRoutine import SwapOutRoutine
 
-#Clase abstracta
-#class Routine(): 
-
-#    def __init__(self, aKernel):
-#        self.kernel = aKernel
-
-#    def run(self, irq):
-        #delegacion a la subclase
-#        pass
-
 class Routines():
 
     def __init__(self, aKernel):
@@ -36,8 +26,11 @@ class Routines():
     def returnRoutineType(self, irq):
         return self.getRoutines().get(irq.getType())
 
+    #Ejecuta la rutina
     def execute(self, irq):
+        #Obtengo la rutina que seria el evento
         routine = self.returnRoutineType(irq)
         print "[Routines] Ejecutar interrupcion: "+str(routine)
+        #y la ejecuto
         routine.run(irq)
         

@@ -6,25 +6,21 @@ class LogicalMemory():
 		self.freeBlocks = []
 		self.takenBlocks = {}
 		self.mainMemory = aMemory
+		#Se genera un bloque libre
 		self.allocFreeBlock(0,aMemory.getSize())
 
 	def allocFreeBlock(self,aBase,aSize):
 		newBlock = Block(aBase,aSize)
 		if(len(self.getFreeBlocks())==0):
 			self.freeBlocks.append(newBlock)
-			print "OPCION A"
 		else:
 			for block in self.getFreeBlocks():
 				if(block.getBase() == (aBase+aSize)):
-					print "OPCION B"
 					block.fusion(newBlock)
 				elif(block.getFinish() == aBase):
-					print "OPCION C"
 					newBlock.fusion(block)
 					adressOfBlock = self.freeBlocks.index(block)
 					self.freeBlocks[adressOfBlock] = newBlock
-					print newBlock.size
-		print "quedo el bloque libre : "+str(self.freeBlocks)+" y el primero con tamano: "+str(self.freeBlocks[0].getSize())
 
 	#PRECOND:
 	#El alocamiento de bloques no maneja colisiones
@@ -37,13 +33,8 @@ class LogicalMemory():
 	#el bloque a borrar debe existir
 	def deleteTakenBlock(self,aPid):
 		block = self.getTakenBlocks()[aPid]
-		print "AHHHHH BASEEE"+str(block.getBase())
-		print "OOOOHH SIZEEE"+str(block.getSize())
 		self.allocFreeBlock(block.getBase(),block.getSize())
 		del self.getTakenBlocks()[aPid]
-		print self.getTakenBlocks()
-		if(self.freeBlocks != []):
-			print self.freeBlocks[0].getSize()
 
 	#PRECOND:
 	#Se le pasa una base que acierte con un bloque libre y que entre el tamano en dicho bloque
@@ -67,9 +58,7 @@ class LogicalMemory():
 		self.deleteFreeBlockFor(base,size)
 		self.allocTakenBlock(pid, base, size)
 		self.putDataInPhysicalMemory(base,instructionList)
-		print self.takenBlocks
-		if(self.freeBlocks != []):
-			print self.freeBlocks[0].getSize()
+		print "[LogicalMemory] Se agrego el bloque: (pid " + str(pid) + ", base " + str(base) + ", size " + str(size) +")"
 
 	def putDataInPhysicalMemory(self, base, instructionList):
 		cell = base
@@ -108,20 +97,26 @@ class LogicalMemory():
 					aPid = currentPid
 		pcb = aKernel.getTable()[aPid]
 		self.savePcbToDisc(pcb, aKernel)
+		print "[LogicalMemory] Se guardo el proceso con id " + str(pcb.getPid()) + " al disco"
 		self.removeDataPcb(aPid, aKernel, table)
+		print "[LogicalMemory] Se elimino de memoria"
 		
 	#Borra los datos del pcb
 	def removeDataPcb(self, aPid, aKernel, aTable):
-		self.deleteTakenBlock(aPid)
-		print"tablee: "+str(aTable) 
+		#Borra el cloque usado que pertenece al pid
+		self.deleteTakenBlock(aPid) 
+		#Borra de la tabla del kernel el pcb
 		del aTable[aPid]
+		#Borra de la cola de ready el pcb
 		aKernel.getScheduler().removePid(aPid)
 
-	#guarda las instrucciones del pcb al disco
+	#Guarda las instrucciones del pcb al disco
 	def savePcbToDisc(self, aPcb, aKernel):
-		print"SAVEE: "+str(aPcb.getPid())
 		instructions = []
+		#Obtengo el bloque al que pertenece el pcb
 		block = self.getTakenBlocks()[aPcb.getPid()]
+		#Agrego las isntrucciones del pcb en la variable instructions
 		for cellInstr in range(block.getBase(),block.getFinish()):
 			instructions.append(aKernel.getMemory().getDataOfCell(cellInstr))
+		#Finalmente guardo el pcb y las instrucciones al disco
 		aKernel.getDisc().saveIntructions(aPcb,instructions)
