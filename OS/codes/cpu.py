@@ -15,6 +15,7 @@ class Cpu():
         self.currentPcb.pcIncrease()
 
     def assignPcb(self,pcb):
+        print "assignPcb "+ str(pcb.getPid())
         self.currentPcb = pcb
 
     def removePcb(self):
@@ -31,30 +32,30 @@ class Cpu():
         #WAIT/TIMEOUT  
         print "[CPU] Ejecutar instruccion.."         
         if(self.quantum == self.roundRobin):
+            #setea quantum en 0
+            self.quantum = 0
             # le dice al handler que lo ponga en wait
             #el handler se ocupa de delegar el contentSwitching
             self.handler.toWait(self.currentPcb)
-            #setea quantum en 0
-            self.quantum = 0
 
         #si la instruccion es de IO entonces..
         #IO
         elif(instruction.isIOInstruction()):
-            #le indica al hanlder que es de IO y le delega el contentSwitching
-            self.handler.toIO(self.currentPcb)
             #setea quantum en 0
             self.quantum = 0
+            #le indica al hanlder que es de IO y le delega el contentSwitching
+            self.handler.toIO(self.currentPcb)
     
         #si la instruccion cuando se ejecuta nos da true
         #significa que es la ultima del proceso actual
         #por lo cual..
         #KILL
         elif(instruction.execute()):
+            #setea quantum en 0
+            self.quantum = 0
             #le manda el pcb al handler para que lo mate
             #el handler se ocupa de delegar el contentSwitching
             self.handler.toKill(self.currentPcb)
-            #setea quantum en 0
-            self.quantum = 0
             
         else:
             #si es false incrementa el pc y el quantum en 1

@@ -55,6 +55,7 @@ class LogicalMemory():
 		self.deleteFreeBlockFor(base,size)
 		self.allocTakenBlock(pid, base, size)
 		self.putDataInPhysicalMemory(base,instructionList)
+		print self.takenBlocks
 
 	def putDataInPhysicalMemory(self, base, instructionList):
 		cell = base
@@ -94,7 +95,6 @@ class LogicalMemory():
 					aPid = currentPid
 
 		self.savePcbToDisc(aPid, aKernel)
-		print "pasa el save de LogicalMemory"
 		self.removeDataPcb(aPid, aKernel, table)
 		
 	#Borra los datos del pcb
@@ -102,7 +102,7 @@ class LogicalMemory():
 		self.deleteTakenBlock(aPid)
 		del aTable[aPid]
 		print "borre el pcb de la tabla"
-		aKernel.getScheduler().removePid()
+		aKernel.getScheduler().removePid(aPid)
 
 	#guarda las instrucciones del pcb al disco
 	def savePcbToDisc(self, aPid, aKernel):

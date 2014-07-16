@@ -24,6 +24,6 @@ class Scheduler():
     def setPriorityMode(self):
         self.currentQueue = PriorityQueue()
 
-    def removePid(self):
+    def removePid(self, aPid):
         #hay q hacer el remove para priority
-        self.currentQueue.removePid()
+        self.currentQueue.removePid(aPid)

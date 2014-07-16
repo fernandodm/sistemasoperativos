@@ -20,7 +20,9 @@ from swapOutRoutine import SwapOutRoutine
 class Routines():
 
     def __init__(self, aKernel):
-        self.routines = {Interruption.NEW: NewRoutine(aKernel), Interruption.KILL: KillRoutine(aKernel), Interruption.TIMEOUT: TimeOutRoutine(aKernel), Interruption.IOOUTPUT: IOInputRoutine(aKernel), Interruption.IOOUTPUT: IOOutputRoutine(aKernel), Interruption.SWAPIN: SwapInRoutine(aKernel), Interruption.SWAPOUT: SwapOutRoutine(aKernel)}
+        self.routines = {
+            Interruption.NEW: NewRoutine(aKernel),
+            Interruption.KILL: KillRoutine(aKernel), Interruption.TIMEOUT: TimeOutRoutine(aKernel), Interruption.IOOUTPUT: IOInputRoutine(aKernel), Interruption.IOOUTPUT: IOOutputRoutine(aKernel), Interruption.SWAPIN: SwapInRoutine(aKernel), Interruption.SWAPOUT: SwapOutRoutine(aKernel)}
 
     def getRoutines(self):
         return self.routines

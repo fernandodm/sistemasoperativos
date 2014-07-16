@@ -15,12 +15,15 @@ class ContinuousAssignment(MemoryManager):
 
 	def thereIsSpace(self, aSize):
 		#si hay bloques libres
+		cont = 0
 		freeBlocks = self.logicalMemory.getFreeBlocks()
 		if(len(freeBlocks) > 0):
 			#busco si hay un bloque con tamanho >= a aSize
 			for block in freeBlocks:
-				if(block.getSize() >= aSize):
-					return True
+				cont += block.getSize()
+
+		if(cont >= aSize):
+			return True
 		return False
 
 	#Agrega instrucciones del disco a la memoria y

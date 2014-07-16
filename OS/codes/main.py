@@ -30,6 +30,7 @@ from threading import Semaphore
 
 semaphore = Semaphore(1)
 size = 6
+
 kernel = Kernel(semaphore,size)
 
 #########################################
@@ -78,4 +79,5 @@ kernel.run("Programa 2")
 kernel.run("Programa 3")
 kernel.run("Programa 4")
 time.sleep(20)
+
 kernel.shutDown()
