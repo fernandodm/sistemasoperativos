@@ -9,7 +9,7 @@ class Pcb():
     self.priority = aPriority
     self.old = 0
 
-	def getDisplacement(self):
+  def getDisplacement(self):
 		return self.displacement
 
   def getOld(self):

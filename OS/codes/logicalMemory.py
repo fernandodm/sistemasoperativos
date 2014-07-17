@@ -9,6 +9,9 @@ class LogicalMemory():
 		#Se genera un bloque libre
 		self.allocFreeBlock(0,aMemory.getSize())
 
+	def setFreeBlocks(self,blocks):
+		self.freeBlocks = blocks
+
 	def allocFreeBlock(self,aBase,aSize):
 		newBlock = Block(aBase,aSize)
 		if(len(self.getFreeBlocks())==0):
@@ -92,7 +95,7 @@ class LogicalMemory():
 				old = currentOld
 				aPid = currentPid
 			else:
-				if(old < currentOld or aKernel.getCpu().currentPcb.pid == aPid):
+				if(old < currentOld or aKernel.getCpu().getCurrentPcb().getPid() == aPid):
 					old = currentOld
 					aPid = currentPid
 		pcb = aKernel.getTable()[aPid]
@@ -120,3 +123,23 @@ class LogicalMemory():
 			instructions.append(aKernel.getMemory().getDataOfCell(cellInstr))
 		#Finalmente guardo el pcb y las instrucciones al disco
 		aKernel.getDisc().saveIntructions(aPcb,instructions)
+
+
+	def getFreeSize(self):
+		total = 0
+		for block in self.freeBlocks:
+			total = total + block.getSize()
+
+	def compact(self):
+		#Me guardo el tamano total de bloques libres que quedan
+		totalFreeMemory = self.getFreeSize()
+		#Elimino todos los bloques libres
+		self.setFreeBlocks([])
+		#Itero sobre todos los bloques ocupados haciendo que se contraigan hacia el principio de la lista de bloques
+		pids = self.getTakenBlocks().keys()
+		for pid in pids:
+			self.getTakenBlocks()[pid].compact(self.getTakenBlocks(),pids.index(pid))
+		#Si despues de la compatacion queda espacio, agrego un nuevo bloque libre con el tamano total de memoria libre que resta
+		lastTakenBlock = self.getTakenBlocks()[len(self.getTakenBlocks())-1]
+		if(lastTakenBlock.getFinish() < self.mainMemory.getSize()):
+			self.allocFreeBlock(lastTakenBlock.getFinish(),self.getFreeSize())

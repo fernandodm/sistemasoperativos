@@ -13,6 +13,9 @@ class ContinuousAssignment(MemoryManager):
 		cell = self.setting.getFreeCellWithSize(self.logicalMemory.getFreeBlocks(), len(instructionsList))
 		self.logicalMemory.putData(pid, cell, instructionsList)
 
+	def getInstruction(self, aPid, aDisplazament):
+		return self.logicalMemory.getInstruction(aPid,aDisplazament)
+		
 	#Devuelve True si hay espacio en memoria
 	def thereIsSpace(self, aSize):
 		cont = 0

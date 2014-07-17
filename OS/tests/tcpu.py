@@ -53,10 +53,10 @@ class CpuTest(unittest.TestCase):
 
     def test_executeWithFullQuantum(self):
 
-        when(self.cpu).currentPcb().thenReturn(self.aPcb)
+        when(self.cpu).getCurrentPcb().thenReturn(self.aPcb)
 
-        when(self.cpu).memoryManager().thenReturn(self.mManager)
-        when(self.mManager).getInstruction(self.aPcb.getPid(),self.aPcb.displacement()).thenReturn(self.instruction)
+        when(self.cpu).getMemory().thenReturn(self.mManager)
+        when(self.mManager).getInstruction(self.aPcb.getPid(),self.aPcb.getDisplacement()).thenReturn(self.instruction)
 
         when(self.instruction).execute().thenReturn(False)
         when(self.instruction).isIOInstruction().thenReturn(False)
@@ -71,10 +71,10 @@ class CpuTest(unittest.TestCase):
 
     def test_executeWithOutFullQuantum(self):
 
-        when(self.cpu).currentPcb().thenReturn(self.aPcb)
+        when(self.cpu).getCurrentPcb().thenReturn(self.aPcb)
 
-        when(self.cpu).memoryManager().thenReturn(self.mManager)
-        when(self.mManager).getInstruction(self.aPcb.getPid(),self.aPcb.displacement()).thenReturn(self.instruction)
+        when(self.cpu).getMemory().thenReturn(self.mManager)
+        when(self.mManager).getInstruction(self.aPcb.getPid(),self.aPcb.getDisplacement()).thenReturn(self.instruction)
 
         when(self.instruction).execute().thenReturn(False)
         when(self.instruction).isIOInstruction().thenReturn(False)
@@ -88,10 +88,10 @@ class CpuTest(unittest.TestCase):
 
     def test_executeWithKillIntruction(self):
 
-        when(self.cpu).currentPcb().thenReturn(self.aPcb)
+        when(self.cpu).getCurrentPcb().thenReturn(self.aPcb)
 
-        when(self.cpu).memoryManager().thenReturn(self.mManager)
-        when(self.mManager).getInstruction(self.aPcb.getPid(),self.aPcb.displacement()).thenReturn(self.instruction)
+        when(self.cpu).getMemory().thenReturn(self.mManager)
+        when(self.mManager).getInstruction(self.aPcb.getPid(),self.aPcb.getDisplacement()).thenReturn(self.instruction)
 
         when(self.instruction).execute().thenReturn(True)
         when(self.instruction).isIOInstruction().thenReturn(False)
@@ -104,10 +104,10 @@ class CpuTest(unittest.TestCase):
 
     def test_executeWithIOIntruction(self):
 
-        when(self.cpu).currentPcb().thenReturn(self.aPcb)
+        when(self.cpu).getCurrentPcb().thenReturn(self.aPcb)
 
-        when(self.cpu).memoryManager().thenReturn(self.mManager)
-        when(self.mManager).getInstruction(self.aPcb.getPid(),self.aPcb.displacement()).thenReturn(self.instruction)
+        when(self.cpu).getMemory().thenReturn(self.mManager)
+        when(self.mManager).getInstruction(self.aPcb.getPid(),self.aPcb.getDisplacement()).thenReturn(self.instruction)
 
         when(self.instruction).execute().thenReturn(False)
         when(self.instruction).isIOInstruction().thenReturn(True)

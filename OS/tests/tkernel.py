@@ -34,7 +34,7 @@ class KernelTest(unittest.TestCase):
         self.kernel.startUp()
         verify(self.kernel.clock,times(1)).startUp()
 
-    def test_getProgramaDelDisco(self):
+    def test_getProgramasDelDisco(self):
         self.program = Mock()
         when(self.kernel.disc).getProgram("program").thenReturn(self.program)
         self.kernel.getProgramasDelDisco("program")
