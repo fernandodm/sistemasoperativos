@@ -26,32 +26,29 @@ from setting import Setting
 from status import Status
 from timeoutroutine import TimeOutRoutine
 
-memorySize = 6
+memorySize = 4
 
 kernel = Kernel(memorySize)
 #kernel.getScheduler().setPriorityMode()
 #########################################
 #########################################
-instruction1 = Instruction("{Programa 1} primer instruccion",False,False)
-instruction2 = Instruction("{Programa 1} segunda instruccion",True,False)
-instruction3 = Instruction("{Programa 1} tercer instruccion",False,True)
+instruction1 = Instruction("{Programa 1} primera instruccion",False,False)
+instruction2 = Instruction("{Programa 1} segunda instruccion",False,True)
 
-instruction4 = Instruction("{Programa 2} primer instruccion",False,False)
-instruction5 = Instruction("{Programa 2} segunda instruccion",False,False)
-instruction6 = Instruction("{Programa 2} tercer instruccion",False,True)
 
-instruction7 = Instruction("{Programa 3} primer instruccion",False,False)
-instruction8 = Instruction("{Programa 3} segunda instruccion",False,False)
-instruction9 = Instruction("{Programa 3} tercer instruccion",False,True)
+instruction3 = Instruction("{Programa 2} primera instruccion",True,False)
+instruction4 = Instruction("{Programa 2} segunda instruccion",False,True)
 
-instruction10 = Instruction("{Programa 4} primer instruccion",False,False)
-instruction11 = Instruction("{Programa 4} segunda instruccion",False,False)
-instruction12 = Instruction("{Programa 4} tercer instruccion",False,True)
+instruction5 = Instruction("{Programa 3} primera instruccion",False,False)
+instruction6 = Instruction("{Programa 3} segunda instruccion",False,True)
 
-instructionsP1 = [instruction1,instruction2,instruction3]
-instructionsP2 = [instruction4,instruction5,instruction6]
-instructionsP3 = [instruction7,instruction8,instruction9]
-instructionsP4 = [instruction10,instruction11,instruction12]
+instruction7 = Instruction("{Programa 4} primera instruccion",False,False)
+instruction8 = Instruction("{Programa 4} segunda instruccion",False,True)
+
+instructionsP1 = [instruction1,instruction2]
+instructionsP2 = [instruction3,instruction4]
+instructionsP3 = [instruction5,instruction6]
+instructionsP4 = [instruction7,instruction8]
 
 prog1 = Program("Programa 1",instructionsP1)
 ##########################################
@@ -75,7 +72,7 @@ kernel.run("Programa 1")
 kernel.run("Programa 2")
 kernel.run("Programa 3")
 kernel.run("Programa 4")
-#time.sleep(5)
-#kernel.table[3].changePriority(2)
+#time.sleep(1)
+#kernel.getTable()[3].changePriority(2)
 time.sleep(20)
 kernel.shutDown()

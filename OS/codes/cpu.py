@@ -5,7 +5,7 @@ class Cpu():
         self.memoryManager = aMemoryManager
         self.handler = aHandler
         self.quantum = 0
-        self.roundRobin = 2
+        self.roundRobin = 1
 
     def getMemory(self):
         return self.memoryManager

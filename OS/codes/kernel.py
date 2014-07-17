@@ -77,6 +77,7 @@ class Kernel:
     #Agrega el pcb en la table
     def addPcb(self,aPcb):
         self.table[aPcb.getPid()] = aPcb
+        print "LALALALAAAAA " + str(len(self.table))
 
     #Borra el pcb en la table
     def removePcb(self,aPcb):
@@ -85,3 +86,5 @@ class Kernel:
         keys = self.table.keys()
         if(len(keys) != 0):
             del self.table[aPcb.getPid()]
+
+        print "RERERERERER " + str(len(self.table))

@@ -60,7 +60,7 @@ class CpuTest(unittest.TestCase):
 
         when(self.instruction).execute().thenReturn(False)
         when(self.instruction).isIOInstruction().thenReturn(False)
-        self.cpu.quantum = 2
+        self.cpu.quantum = 1
         self.cpu.execute()
 
         verify(self.cpu.handler,times(1)).toWait(self.aPcb)
@@ -116,7 +116,4 @@ class CpuTest(unittest.TestCase):
         verify(self.cpu.handler,times(0)).toWait(self.aPcb)
         verify(self.cpu.handler,times(0)).toKill(self.aPcb)
         verify(self.cpu.handler,times(1)).toIOInput(self.aPcb)
-        assert self.cpu.quantum == 0
-
-suite = unittest.TestLoader().loadTestsFromTestCase(CpuTest)
-unittest.TextTestRunner(verbosity=2).run(suite) 
+        assert self.cpu.quantum == 0 
