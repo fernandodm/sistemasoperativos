@@ -22,7 +22,7 @@ class KernelTest(unittest.TestCase):
         self.IO = Mock()
         self.clock = Mock()
         self.sem = Mock()
-        self.kernel = Kernel(self.IO,self.sem,1000)
+        self.kernel = Kernel(1000)
         self.kernel.disc = Mock()
         self.kernel.memory = Mock()
         self.kernel.scheduler = Mock()
@@ -32,8 +32,7 @@ class KernelTest(unittest.TestCase):
         
     def test_startUp(self):
         self.kernel.startUp()
-        verify(self.kernel.cpu,times(1)).start()
-        verify(self.kernel.clock,times(1)).start()
+        verify(self.kernel.clock,times(1)).startUp()
 
     def test_getProgramaDelDisco(self):
         self.program = Mock()

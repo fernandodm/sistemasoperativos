@@ -18,8 +18,7 @@ import unittest
 class InterruptionProcessorTest(unittest.TestCase):
 
         def setUp(self):
-            
-            self.aHandler = InterruptionHandler(Mock(),Mock())
+            self.aHandler = InterruptionHandler(Mock())
             self.aRoutines = Mock()
             self.aProcessor = self.aHandler.interruptionProcessor
             self.aProcessor.routines = self.aRoutines
