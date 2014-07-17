@@ -54,8 +54,5 @@ class IOTest(unittest.TestCase):
     	when(pcb).getDisplacement().thenReturn(5)
 
     	self.io.run()
-    	
-    	verify(handler,times(1)).handler(any(Irq))
 
-suite = unittest.TestLoader().loadTestsFromTestCase(IOTest)
-unittest.TextTestRunner(verbosity=2).run(suite) 
+    	verify(handler,times(1)).handler(any(Irq))
