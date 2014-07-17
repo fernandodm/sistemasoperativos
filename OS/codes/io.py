@@ -27,7 +27,7 @@ class IO():
 			#agarra el proximo pcb
 			pcb = self.fetch()
 			#encuentra la intruccion actual
-			instruction = self.kernel.getMemoryManager().getInstruction(pcb.getPid(),pcb.displacement)
+			instruction = self.kernel.getMemoryManager().getInstruction(pcb.getPid(),pcb.getDisplacement())
 			#la executa
 			print "[IO] Ejecutar instruccion.."
 			instruction.execute()

@@ -19,7 +19,7 @@ class Block():
 		return self.free
 
 	def setBase(self, newBase):
-		this.base = newBase
+		self.base = newBase
 
 	def take(self):
 		self.free = False
