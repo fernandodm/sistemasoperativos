@@ -13,7 +13,7 @@ class BadWaySetting():
 				else:
 					bad = block
 
-		if(best != None):
+		if(bad != None):
 			return bad.getBase()
 		else:
 			return None

@@ -5,6 +5,7 @@ class BestSetting():
 
 		best = None
 
+
 		for block in freeBlocks:
 			if(block.getSize() > size):
 				if(best != None):
@@ -13,7 +14,9 @@ class BestSetting():
 				else:
 					best = block
 			elif(block.getSize() == size):
+				print "entre"
 				return block.getBase()
+
 
 		if(best != None):
 			return best.getBase()
