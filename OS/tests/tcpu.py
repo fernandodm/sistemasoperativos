@@ -15,14 +15,15 @@ import unittest
 class CpuTest(unittest.TestCase):
 
     def setUp(self):
-        mMemory = Mock()
-        mHandler = Mock()
-        self.cpu = Cpu(mMemory,mHandler,0)
+        self.mManager = Mock()
+        self.mHandler = Mock()
+        self.cpu = Cpu(self.mManager,self.mHandler)
         self.aPcb = Mock()
-        when(self.aPcb).pid().thenReturn(0)
+        when(self.aPcb).getPid().thenReturn(0)
         when(self.aPcb).basePointer().thenReturn(0)
         when(self.aPcb).programCounter().thenReturn(0)
         when(self.aPcb).size().thenReturn(0)
+        when(self.aPcb).displazament().thenReturn(0)
         self.instruction = Mock()
 
     def test_changeRoundRobin(self):
@@ -51,12 +52,17 @@ class CpuTest(unittest.TestCase):
         self.assertFalse(self.cpu.havePcb())
 
     def test_executeWithFullQuantum(self):
-        when(self.cpu.memory).getCells().thenReturn([self.instruction])
+
+        when(self.cpu).currentPcb().thenReturn(self.aPcb)
+
+        when(self.cpu).memoryManager().thenReturn(self.mManager)
+        when(self.mManager).getInstruction(self.aPcb.getPid(),self.aPcb.displacement()).thenReturn(self.instruction)
+
         when(self.instruction).execute().thenReturn(False)
         when(self.instruction).isIOInstruction().thenReturn(False)
-        self.cpu.currentPcb = self.aPcb
-        self.cpu.quantum = 3
+        self.cpu.quantum = 2
         self.cpu.execute()
+
         verify(self.cpu.handler,times(1)).toWait(self.aPcb)
         verify(self.cpu.handler,times(0)).toKill(self.aPcb)
         verify(self.cpu.handler,times(0)).toIO(self.aPcb)
@@ -64,35 +70,50 @@ class CpuTest(unittest.TestCase):
 
 
     def test_executeWithOutFullQuantum(self):
-        when(self.cpu.memory).getCells().thenReturn([self.instruction])
+
+        when(self.cpu).currentPcb().thenReturn(self.aPcb)
+
+        when(self.cpu).memoryManager().thenReturn(self.mManager)
+        when(self.mManager).getInstruction(self.aPcb.getPid(),self.aPcb.displacement()).thenReturn(self.instruction)
+
         when(self.instruction).execute().thenReturn(False)
         when(self.instruction).isIOInstruction().thenReturn(False)
-        self.cpu.currentPcb = self.aPcb
         self.cpu.execute()
-        verify(self.cpu.handler,times(0)).toWait(self.aPcb);
+
+        verify(self.aPcb).pcIncrease()
+        verify(self.cpu.handler,times(0)).toWait(self.aPcb)
         verify(self.cpu.handler,times(0)).toKill(self.aPcb)
         verify(self.cpu.handler,times(0)).toIO(self.aPcb)
         assert self.cpu.quantum == 1
 
     def test_executeWithKillIntruction(self):
-        when(self.cpu.memory).getCells().thenReturn([self.instruction])
+
+        when(self.cpu).currentPcb().thenReturn(self.aPcb)
+
+        when(self.cpu).memoryManager().thenReturn(self.mManager)
+        when(self.mManager).getInstruction(self.aPcb.getPid(),self.aPcb.displacement()).thenReturn(self.instruction)
+
         when(self.instruction).execute().thenReturn(True)
         when(self.instruction).isIOInstruction().thenReturn(False)
-        self.cpu.currentPcb = self.aPcb
         self.cpu.execute()
-        verify(self.cpu.handler,times(0)).toWait(self.aPcb);
+
+        verify(self.cpu.handler,times(0)).toWait(self.aPcb)
         verify(self.cpu.handler,times(1)).toKill(self.aPcb)
         verify(self.cpu.handler,times(0)).toIO(self.aPcb)
         assert self.cpu.quantum == 0
 
     def test_executeWithIOIntruction(self):
-        when(self.cpu.memory).getCells().thenReturn([self.instruction])
+
+        when(self.cpu).currentPcb().thenReturn(self.aPcb)
+
+        when(self.cpu).memoryManager().thenReturn(self.mManager)
+        when(self.mManager).getInstruction(self.aPcb.getPid(),self.aPcb.displacement()).thenReturn(self.instruction)
+
         when(self.instruction).execute().thenReturn(False)
         when(self.instruction).isIOInstruction().thenReturn(True)
-        self.cpu.currentPcb = self.aPcb
         self.cpu.execute()
-        verify(self.cpu.handler,times(0)).toWait(self.aPcb);
-        verify(self.cpu.handler,times(0)).toKill(self.aPcb)
-        verify(self.cpu.handler,times(1)).toIO(self.aPcb)
-        assert self.cpu.quantum == 0
 
+        verify(self.cpu.handler,times(0)).toWait(self.aPcb)
+        verify(self.cpu.handler,times(0)).toKill(self.aPcb)
+        verify(self.cpu.handler,times(1)).toIOInput(self.aPcb)
+        assert self.cpu.quantum == 0

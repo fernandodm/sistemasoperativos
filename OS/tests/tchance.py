@@ -48,3 +48,31 @@ class ChanceTest(unittest.TestCase):
 
     def test_isEmpty_whithOutElements(self):
         assert (self.chance.isEmpty())
+
+    def test_ifAppearDelete_withPid(self):
+
+        aPcb = Mock()
+        other = Mock()
+        otherP = Mock()
+
+        when(aPcb).getPid().thenReturn(0)
+        when(other).getPid().thenReturn(1)
+        when(otherP).getPid().thenReturn(2)
+
+        self.chance.elementos = [aPcb,other,otherP]
+        assert self.chance.ifAppearDelete(1)
+        assert self.chance.elementos == [aPcb,otherP]
+
+    def test_ifAppearDelete_withoutPid(self):
+
+        aPcb = Mock()
+        other = Mock()
+        otherP = Mock()
+
+        when(aPcb).getPid().thenReturn(0)
+        when(other).getPid().thenReturn(1)
+        when(otherP).getPid().thenReturn(2)
+
+        self.chance.elementos = [aPcb,other,otherP]
+        assert not self.chance.ifAppearDelete(3)
+        assert self.chance.elementos == [aPcb,other,otherP]

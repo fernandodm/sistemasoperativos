@@ -21,12 +21,12 @@ class ClockTest(unittest.TestCase):
 		assert (self.clock.isRunning == False)
 		self.clock.startUp()
 		assert (self.clock.isRunning == True)
-		self.clock.shutdown()
+		self.clock.shutDown()
 
 	def test_shutdown(self):
 		self.clock.startUp()
 		assert (self.clock.isRunning == True)
-		self.clock.shutdown()
+		self.clock.shutDown()
 		assert (self.clock.isRunning == False)
 
 	def test_addSuscribed(self):
@@ -43,4 +43,3 @@ class ClockTest(unittest.TestCase):
 		verify(aCpu,times(1)).run();
 		verify(other,times(1)).run();
 		verify(another,times(1)).run();
-
